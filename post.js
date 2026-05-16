@@ -16,10 +16,14 @@ const {
   publicBaseUrl,
 } = require('./tasks/posts.js');
 const {
+  validateImagesForTikTok,
+  formatImageReport,
+} = require('./tasks/image-tiktok.js');
+const {
   uploadPhotosFromUrls,
   uploadInboxVideoFromPullUrl,
   uploadInboxVideoFromLocalFile,
-  fetchPostStatus,
+  waitForPublishStatus,
 } = require('./tasks/tiktok-content-posting.js');
 
 const ROOT = __dirname;
@@ -68,6 +72,23 @@ function printVerifyResults(results) {
 }
 
 async function publishPhoto(accessToken, scan, classification) {
+  const imagePaths = classification.images.map((f) => f.localPath);
+  const tiktokCheck = await validateImagesForTikTok(imagePaths);
+  console.log('\nПроверка размеров (TikTok: ≤1080px, ≤20 MB):');
+  for (const r of tiktokCheck.reports) {
+    const mark = r.ok ? '✓' : '✗';
+    const dim = r.width != null ? `${r.width}×${r.height}px` : '?';
+    console.log(
+      `  ${mark} ${r.name}: ${dim}, ${(r.bytes / 1024 / 1024).toFixed(2)} MB`,
+    );
+  }
+  if (!tiktokCheck.ok) {
+    console.error('\n' + tiktokCheck.bad.map(formatImageReport).join('\n'));
+    throw new Error(
+      'Фото не проходят лимиты TikTok. Выполните: npm run posts:fit — затем залейте на GitHub Pages',
+    );
+  }
+
   const checks = await verifyPublicUrls(classification.images);
   if (!printVerifyResults(checks)) {
     throw new Error(
@@ -106,21 +127,28 @@ async function publishVideo(accessToken, scan, classification) {
 async function printPublishResult(result, accessToken) {
   const publishId =
     result?.data?.publish_id ?? result?.publishId ?? null;
-  console.log('\n--- Результат ---');
+  console.log('\n--- Init ---');
   console.log(JSON.stringify(result, null, 2));
-  if (publishId) {
-    console.log(`\npublish_id: ${publishId}`);
-    try {
-      const status = await fetchPostStatus(accessToken, publishId);
-      console.log('\nСтатус:');
-      console.log(JSON.stringify(status, null, 2));
-    } catch (err) {
-      console.warn('Не удалось запросить статус:', err.message);
-    }
-  }
+  if (!publishId) return;
+
+  console.log(`\npublish_id: ${publishId}`);
   console.log(
-    '\nПользователь должен завершить публикацию в приложении TikTok (уведомление в inbox).',
+    '\nОжидание TikTok: скачивание медиа → отправка в Inbox (опрос статуса)…',
   );
+
+  const status = await waitForPublishStatus(accessToken, publishId);
+  const final = status?.data?.status;
+
+  console.log('\n--- Финальный статус ---');
+  console.log(JSON.stringify(status, null, 2));
+
+  if (final === 'SEND_TO_USER_INBOX') {
+    console.log(
+      '\nЧерновик в Inbox: откройте TikTok (тот же аккаунт) → входящие → завершите публикацию.',
+    );
+  } else if (final === 'PUBLISH_COMPLETE') {
+    console.log('\nПост уже опубликован через TikTok.');
+  }
 }
 
 async function main() {
@@ -177,6 +205,16 @@ main().catch((err) => {
   if (err.code === 'ACCESS_MISSING' || err.code === 'REAUTH_REQUIRED') {
     console.error(err.message);
     console.error('Сначала выполните: npm start');
+  } else if (err.failReason) {
+    console.error(err.message);
+    if (err.failReason === 'picture_size_check_failed') {
+      console.error(
+        'Уменьшите фото: npm run posts:fit — затем commit/push на GitHub Pages',
+      );
+    }
+    console.error(
+      'Справка: https://developers.tiktok.com/doc/content-posting-api-reference-get-video-status#fail_reasons',
+    );
   } else {
     console.error(err.message);
   }

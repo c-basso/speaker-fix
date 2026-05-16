@@ -4,9 +4,12 @@
     "scripts": {
         "start": "node start.js",
         "post": "node post.js",
+        "posts:fit": "node scripts/fit-images.js",
         "check-secrets": "node scripts/check-secrets.js"
     },
     "dependencies": {
-        "dotenv": "^16.4.5"
+        "dotenv": "^16.4.5",
+        "image-size": "^1.1.1",
+        "sharp": "^0.33.5"
     }
 }

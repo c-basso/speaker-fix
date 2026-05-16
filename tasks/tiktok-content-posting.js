@@ -164,6 +164,88 @@ async function fetchPostStatus(accessToken, publishId) {
   return parseTikTokJson(res);
 }
 
+const PROCESSING_STATUSES = new Set([
+  'PROCESSING_DOWNLOAD',
+  'PROCESSING_UPLOAD',
+]);
+
+/** Успех для MEDIA_UPLOAD: черновик ушёл в Inbox. */
+const INBOX_READY_STATUSES = new Set([
+  'SEND_TO_USER_INBOX',
+  'PUBLISH_COMPLETE',
+]);
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function formatStatusProgress(data) {
+  const parts = [];
+  if (data.downloaded_bytes != null) {
+    parts.push(`downloaded_bytes=${data.downloaded_bytes}`);
+  }
+  if (data.uploaded_bytes != null) {
+    parts.push(`uploaded_bytes=${data.uploaded_bytes}`);
+  }
+  return parts.length ? ` (${parts.join(', ')})` : '';
+}
+
+/**
+ * Опрашивает /status/fetch/ до SEND_TO_USER_INBOX, PUBLISH_COMPLETE или FAILED.
+ * Отдельного API «отправить в inbox» нет — TikTok делает это после скачивания медиа.
+ * @see https://developers.tiktok.com/doc/content-posting-api-reference-get-video-status
+ */
+async function waitForPublishStatus(accessToken, publishId, options = {}) {
+  const intervalMs =
+    options.intervalMs ??
+    (Number(process.env.TIKTOK_STATUS_POLL_MS) || 5000);
+  const timeoutMs =
+    options.timeoutMs ??
+    (Number(process.env.TIKTOK_STATUS_TIMEOUT_MS) || 15 * 60 * 1000);
+  const targetStatuses =
+    options.targetStatuses ?? [...INBOX_READY_STATUSES];
+
+  const started = Date.now();
+  let lastStatus = null;
+  let lastResponse = null;
+
+  while (Date.now() - started < timeoutMs) {
+    lastResponse = await fetchPostStatus(accessToken, publishId);
+    const data = lastResponse?.data ?? {};
+    const status = data.status;
+
+    if (status && status !== lastStatus) {
+      lastStatus = status;
+      console.log(`  → ${status}${formatStatusProgress(data)}`);
+    }
+
+    if (status === 'FAILED') {
+      const reason = data.fail_reason || 'не указана';
+      const err = new Error(`TikTok FAILED: ${reason}`);
+      err.failReason = data.fail_reason;
+      err.statusResponse = lastResponse;
+      throw err;
+    }
+
+    if (targetStatuses.includes(status)) {
+      return lastResponse;
+    }
+
+    if (status && !PROCESSING_STATUSES.has(status)) {
+      console.log(`  … статус ${status}, ждём ${[...targetStatuses].join(' или ')}`);
+    }
+
+    await sleep(intervalMs);
+  }
+
+  const err = new Error(
+    `Таймаут ${Math.round(timeoutMs / 1000)} с: последний статус «${lastStatus || 'нет'}»`,
+  );
+  err.lastStatus = lastStatus;
+  err.statusResponse = lastResponse;
+  throw err;
+}
+
 /**
  * Фото: POST /v2/post/publish/content/init/
  * @param {object} payload — post_info, source_info, post_mode, media_type (как в доке)
@@ -241,6 +323,9 @@ module.exports = {
   initInboxVideoPullFromUrl,
   uploadInboxVideoFromPullUrl,
   fetchPostStatus,
+  waitForPublishStatus,
+  PROCESSING_STATUSES,
+  INBOX_READY_STATUSES,
   initContentUpload,
   uploadPhotosFromUrls,
 };
