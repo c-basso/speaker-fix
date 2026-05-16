@@ -18,7 +18,7 @@ const ENDPOINTS = {
 function jsonHeaders(accessToken) {
   return {
     Authorization: `Bearer ${accessToken}`,
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json; charset=UTF-8',
   };
 }
 
@@ -31,7 +31,11 @@ async function parseTikTokJson(res) {
     throw new Error(`Некорректный JSON (${res.status}): ${text.slice(0, 300)}`);
   }
   if (!res.ok) {
-    throw new Error(`HTTP ${res.status}: ${json?.error?.message || text}`);
+    const errCode = json?.error?.code;
+    const errMsg = json?.error?.message || text;
+    throw new Error(
+      `HTTP ${res.status}${errCode ? ` [${errCode}]` : ''}: ${errMsg}`,
+    );
   }
   const code = json?.error?.code;
   if (code && code !== 'ok') {
@@ -165,9 +169,14 @@ async function fetchPostStatus(accessToken, publishId) {
  * @param {object} payload — post_info, source_info, post_mode, media_type (как в доке)
  */
 async function initContentUpload(accessToken, payload) {
+  const postInfo = payload.post_info ?? payload.postInfo ?? {};
+  const sourceInfo = payload.source_info ?? payload.sourceInfo;
+  if (!sourceInfo?.source || !Array.isArray(sourceInfo.photo_images)) {
+    throw new Error('source_info: нужны source и photo_images');
+  }
   const body = {
-    post_info: payload.post_info ?? payload.postInfo,
-    source_info: payload.source_info ?? payload.sourceInfo,
+    post_info: postInfo,
+    source_info: sourceInfo,
     post_mode: payload.post_mode ?? payload.postMode ?? 'MEDIA_UPLOAD',
     media_type: payload.media_type ?? payload.mediaType ?? 'PHOTO',
   };
@@ -183,16 +192,39 @@ async function initContentUpload(accessToken, payload) {
  * Фото с URL (PULL_FROM_URL), заголовок/описание опционально.
  */
 async function uploadPhotosFromUrls(accessToken, photoUrls, options = {}) {
-  const cover =
-    options.photo_cover_index ?? options.photoCoverIndex ?? 1;
+  if (!photoUrls?.length) {
+    throw new Error('photo_images: нужен хотя бы один URL');
+  }
+  // API: индекс обложки с 0 — для одного фото только 0 (см. Photo Post API)
+  let coverIndex =
+    options.photo_cover_index ?? options.photoCoverIndex ?? 0;
+  coverIndex = Number(coverIndex);
+  if (
+    !Number.isInteger(coverIndex) ||
+    coverIndex < 0 ||
+    coverIndex >= photoUrls.length
+  ) {
+    throw new Error(
+      `photo_cover_index должен быть от 0 до ${photoUrls.length - 1}`,
+    );
+  }
+
+  const post_info = {};
+  if (options.title != null && String(options.title).trim()) {
+    post_info.title = String(options.title).trim();
+  }
+  if (options.description != null && String(options.description).trim()) {
+    post_info.description = String(options.description).trim();
+  }
+  if (!post_info.title) {
+    post_info.title = 'Post';
+  }
+
   return initContentUpload(accessToken, {
-    post_info: {
-      ...(options.title != null && { title: options.title }),
-      ...(options.description != null && { description: options.description }),
-    },
+    post_info,
     source_info: {
       source: 'PULL_FROM_URL',
-      photo_cover_index: cover,
+      photo_cover_index: coverIndex,
       photo_images: photoUrls,
     },
     post_mode: 'MEDIA_UPLOAD',

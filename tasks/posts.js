@@ -3,7 +3,9 @@
 const fs = require('fs/promises');
 const path = require('path');
 
-const IMAGE_EXT = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif']);
+/** TikTok принимает только JPEG и WebP: https://developers.tiktok.com/doc/content-posting-api-media-transfer-guide */
+const IMAGE_EXT = new Set(['.jpg', '.jpeg', '.webp']);
+const IMAGE_EXT_UNSUPPORTED = new Set(['.png', '.gif', '.heic', '.bmp']);
 const VIDEO_EXT = new Set(['.mp4', '.mov', '.webm']);
 
 const DEFAULT_PUBLIC_BASE = 'https://c-basso.github.io/speaker-fix';
@@ -22,6 +24,7 @@ function joinPublicUrl(...segments) {
 function mediaKind(filename) {
   const ext = path.extname(filename).toLowerCase();
   if (IMAGE_EXT.has(ext)) return 'image';
+  if (IMAGE_EXT_UNSUPPORTED.has(ext)) return 'unsupported-image';
   if (VIDEO_EXT.has(ext)) return 'video';
   return null;
 }
@@ -61,6 +64,11 @@ async function scanPostFolder(postDir, slug) {
   for (const name of names.sort()) {
     if (name.startsWith('.') || name === 'post.json') continue;
     const kind = mediaKind(name);
+    if (kind === 'unsupported-image') {
+      throw new Error(
+        `${name}: TikTok поддерживает только .jpg, .jpeg, .webp (не .png/.gif)`,
+      );
+    }
     if (!kind) continue;
     const stat = await fs.stat(path.join(postDir, name));
     if (!stat.isFile()) continue;
@@ -102,7 +110,11 @@ async function verifyPublicUrls(files) {
 function classifyPost(scan) {
   const { images, videos } = scan;
   if (images.length === 0 && videos.length === 0) {
-    return { type: 'empty', error: 'В папке нет поддерживаемых медиа (.jpg, .png, .webp, .mp4, …)' };
+    return {
+      type: 'empty',
+      error:
+        'В папке нет поддерживаемых медиа (.jpg, .jpeg, .webp или .mp4, …)',
+    };
   }
   if (videos.length > 0 && images.length > 0) {
     return {

@@ -83,7 +83,7 @@ async function publishPhoto(accessToken, scan, classification) {
   const response = await uploadPhotosFromUrls(accessToken, photoUrls, {
     title,
     description,
-    photoCoverIndex: 1,
+    photoCoverIndex: 0,
   });
   return response;
 }
