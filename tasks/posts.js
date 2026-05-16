@@ -9,6 +9,7 @@ const IMAGE_EXT_UNSUPPORTED = new Set(['.png', '.gif', '.heic', '.bmp']);
 const VIDEO_EXT = new Set(['.mp4', '.mov', '.webm']);
 
 const DEFAULT_PUBLIC_BASE = 'https://c-basso.github.io/speaker-fix';
+const { MAX_SLIDES } = require('./post-slides.js');
 
 function publicBaseUrl() {
   const base = (
@@ -62,7 +63,9 @@ async function scanPostFolder(postDir, slug) {
   const names = await fs.readdir(postDir);
   const files = [];
   for (const name of names.sort()) {
-    if (name.startsWith('.') || name === 'post.json') continue;
+    if (name.startsWith('.') || name.startsWith('_') || name === 'post.json') {
+      continue;
+    }
     const kind = mediaKind(name);
     if (kind === 'unsupported-image') {
       throw new Error(
@@ -127,6 +130,12 @@ function classifyPost(scan) {
   }
   if (videos.length === 1) {
     return { type: 'video', video: videos[0] };
+  }
+  if (images.length > MAX_SLIDES) {
+    return {
+      type: 'too-many-photos',
+      error: `В посте ${images.length} фото — максимум ${MAX_SLIDES} (01.jpg … ${String(MAX_SLIDES).padStart(2, '0')}.jpg)`,
+    };
   }
   return { type: 'photo', images };
 }

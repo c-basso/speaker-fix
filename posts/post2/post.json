@@ -1,0 +1,78 @@
+{
+  "title": "10M VIEWS? HERE'S THE SECRET!",
+  "description": "How to get 10M views on TikTok in 7 days. No luck? Here's the real trick.",
+  "topic": "10000000 million views viral video",
+  "slideCount": 5,
+  "slides": [
+    {
+      "title": "10M VIEWS? WRONG!",
+      "description": "You're posting at the wrong time.",
+      "logoCaption": "",
+      "unsplashQuery": "viral video analytics"
+    },
+    {
+      "title": "Mistake #1",
+      "description": "No trending audio.",
+      "logoCaption": "",
+      "unsplashQuery": "tiktok trends"
+    },
+    {
+      "title": "The Fix",
+      "description": "Post when your audience sleeps.",
+      "logoCaption": "",
+      "unsplashQuery": "midnight phone usage"
+    },
+    {
+      "title": "The Twist",
+      "description": "Use 15-second hooks only.",
+      "logoCaption": "",
+      "unsplashQuery": "quick video clip"
+    },
+    {
+      "title": "DO THIS NOW",
+      "description": "Try this template. Tag a friend.",
+      "logoCaption": "",
+      "unsplashQuery": "viral video template"
+    }
+  ],
+  "files": [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg"
+  ],
+  "unsplash": {
+    "query": "viral video analytics",
+    "photoId": "4QmSdCP4bhM",
+    "author": "Szabo Viktor",
+    "slides": [
+      {
+        "file": "01.jpg",
+        "photoId": "4QmSdCP4bhM",
+        "author": "Szabo Viktor"
+      },
+      {
+        "file": "02.jpg",
+        "photoId": "q1n1LmoL4Es",
+        "author": "Nik"
+      },
+      {
+        "file": "03.jpg",
+        "photoId": "JbAv3nAKOtc",
+        "author": "Priscilla Du Preez 🇨🇦"
+      },
+      {
+        "file": "04.jpg",
+        "photoId": "owS6oZm9hIY",
+        "author": "Hakim Menikh"
+      },
+      {
+        "file": "05.jpg",
+        "photoId": "niUkImZcSP8",
+        "author": "Alexander Shatov"
+      }
+    ]
+  },
+  "createdAt": "2026-05-16T14:34:42.298Z"
+}
