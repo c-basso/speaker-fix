@@ -1,0 +1,12 @@
+{
+    "name": "speaker-fix",
+    "private": true,
+    "scripts": {
+        "start": "node start.js",
+        "post": "node post.js",
+        "check-secrets": "node scripts/check-secrets.js"
+    },
+    "dependencies": {
+        "dotenv": "^16.4.5"
+    }
+}

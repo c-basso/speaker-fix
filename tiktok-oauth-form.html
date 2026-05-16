@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TikTok — авторизация (OAuth)</title>
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      line-height: 1.45;
+      color: #0f0f0f;
+      background: #f5f5f7;
+    }
+    body { margin: 0; padding: 1.5rem; }
+    main {
+      max-width: 32rem;
+      margin: 0 auto;
+      background: #fff;
+      padding: 1.5rem 1.75rem;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    }
+    h1 { font-size: 1.15rem; margin: 0 0 0.25rem; font-weight: 650; }
+    p.meta { margin: 0 0 1.25rem; font-size: 0.875rem; color: #525252; }
+    label { display: block; font-size: 0.8125rem; font-weight: 600; margin-bottom: 0.35rem; }
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.5rem 0.65rem;
+      border: 1px solid #d4d4d8;
+      border-radius: 8px;
+      font: inherit;
+      margin-bottom: 1rem;
+    }
+    .row { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
+    button {
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      padding: 0.6rem 1.25rem;
+      font: inherit;
+      font-weight: 650;
+      cursor: pointer;
+      background: #fe2c55;
+      color: #fff;
+    }
+    button:hover { filter: brightness(0.95); }
+    button.secondary {
+      background: #e4e4e7;
+      color: #18181b;
+    }
+    #state-out {
+      font-size: 0.75rem;
+      color: #71717a;
+      word-break: break-all;
+      flex: 1;
+      min-width: 12rem;
+    }
+    .step2 {
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid #e4e4e7;
+    }
+    .step2 h2 { font-size: 0.95rem; margin: 0 0 0.5rem; font-weight: 650; }
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.5rem 0.65rem;
+      border: 1px solid #d4d4d8;
+      border-radius: 8px;
+      font: inherit;
+      min-height: 4.5rem;
+      resize: vertical;
+      margin-bottom: 0.75rem;
+    }
+    #redirect-status { font-size: 0.8125rem; margin: 0 0 0.75rem; min-height: 1.25rem; }
+    #redirect-status.ok { color: #15803d; }
+    #redirect-status.err { color: #b91c1c; }
+    footer {
+      margin-top: 1.25rem;
+      font-size: 0.75rem;
+      color: #71717a;
+    }
+    footer a { color: #2563eb; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Вход через TikTok</h1>
+    <p class="meta">
+      Форма ведёт на <code>https://www.tiktok.com/v2/auth/authorize/</code>.
+      <code>redirect_uri</code> должен совпадать с настройками приложения (HTTPS, без query и <code>#</code>).
+      Scope для профиля и загрузки видео: <code>user.info.basic</code> и <code>video.upload</code> (в поле ниже — через запятую, без пробелов).
+    </p>
+
+    <form
+      method="get"
+      action="https://www.tiktok.com/v2/auth/authorize/"
+      id="oauth-form"
+    >
+      <input type="hidden" name="response_type" value="code" />
+      <input type="hidden" name="state" id="state-field" />
+
+      <label for="client_key">client_key</label>
+      <input
+        id="client_key"
+        name="client_key"
+        required
+        autocomplete="off"
+        value=""
+        placeholder="Подставляется из .env при npm start"
+      />
+
+      <label for="redirect_uri">redirect_uri</label>
+      <input
+        id="redirect_uri"
+        name="redirect_uri"
+        type="url"
+        required
+        value=""
+        placeholder="TIKTOK_REDIRECT_URI из .env"
+      />
+
+      <label for="scope">scope</label>
+      <input
+        id="scope"
+        name="scope"
+        required
+        placeholder="через запятую, без пробелов"
+        value="user.info.basic,video.upload"
+      />
+
+      <div class="row">
+        <button type="submit">Продолжить с TikTok</button>
+        <button type="button" class="secondary" id="new-state">Новый state</button>
+      </div>
+      <p id="state-out" aria-live="polite"></p>
+    </form>
+
+    <section class="step2" id="step2">
+      <h2>Шаг 2 — URL после редиректа</h2>
+      <p class="meta" style="margin-bottom: 0.75rem;">
+        После входа в TikTok скопируйте <strong>весь</strong> адрес из строки браузера (с <code>?code=</code>) и вставьте ниже.
+      </p>
+      <label for="redirect_url">redirect URL</label>
+      <textarea
+        id="redirect_url"
+        name="redirect_url"
+        placeholder="https://…/?code=…&scopes=…&state=…"
+        autocomplete="off"
+      ></textarea>
+      <p id="redirect-status" aria-live="polite"></p>
+      <button type="button" id="save-redirect">Сохранить URL</button>
+    </section>
+
+    <footer>
+      Документация:
+      <a href="https://developers.tiktok.com/doc/login-kit-web" target="_blank" rel="noopener">Login Kit Web</a>,
+      <a href="https://developers.tiktok.com/doc/oauth-user-access-token-management" target="_blank" rel="noopener">токены</a>.
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      function randomState() {
+        if (window.crypto && crypto.getRandomValues) {
+          const a = new Uint8Array(24);
+          crypto.getRandomValues(a);
+          return Array.from(a, function (b) {
+            return b.toString(16).padStart(2, '0');
+          }).join('');
+        }
+        return Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
+      }
+
+      var stateField = document.getElementById('state-field');
+      var stateOut = document.getElementById('state-out');
+
+      function setState() {
+        var s = randomState();
+        stateField.value = s;
+        stateOut.textContent = 'state (сверьте в callback): ' + s;
+      }
+
+      document.getElementById('new-state').addEventListener('click', setState);
+      setState();
+
+      var statusEl = document.getElementById('redirect-status');
+      document.getElementById('save-redirect').addEventListener('click', function () {
+        var url = document.getElementById('redirect_url').value.trim();
+        statusEl.className = '';
+        statusEl.textContent = 'Отправка…';
+        if (!url || url.indexOf('code=') === -1) {
+          statusEl.className = 'err';
+          statusEl.textContent = 'Вставьте полный URL с параметром code';
+          return;
+        }
+        fetch('/oauth/redirect-done', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ redirectUrl: url }),
+        })
+          .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+          .then(function (res) {
+            if (res.ok && res.j.ok) {
+              statusEl.className = 'ok';
+              statusEl.textContent = 'Готово. Можно вернуться в терминал.';
+              return;
+            }
+            statusEl.className = 'err';
+            statusEl.textContent = (res.j && res.j.error) || 'Ошибка сохранения';
+          })
+          .catch(function () {
+            statusEl.className = 'err';
+            statusEl.textContent = 'Не удалось связаться с npm start (локальный сервер)';
+          });
+      });
+    })();
+  </script>
+</body>
+</html>
