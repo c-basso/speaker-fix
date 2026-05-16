@@ -1,66 +1,73 @@
 {
-  "title": "Why Your Music Is Always Too Quiet",
-  "description": "https://volumeboosting.com/ \nYou’re missing out on the loudest beats because you’re using the wrong tool. Unlock insane volume with a single click. 🎧🔥 #AudioHack #VolumeBoosting #MusicLovers #TechTips",
-  "topic": "max volume sound with https://volumeboosting.com/",
-  "slideCount": 4,
+  "title": "TikTok Photo Trends Are DEAD – Here’s What Actually Works",
+  "description": "Stop copying. Create. 5 viral hacks that blow up. #TikTokTrends #PhotoHacks #ContentTips",
+  "topic": "tiktok photo trends",
+  "slideCount": 5,
   "slides": [
     {
-      "title": "Your phone is MUTING YOU",
-      "description": "Even at max, most apps cap at 70% of true output",
-      "logoCaption": "",
-      "unsplashQuery": "phone speaker closeup"
+      "title": "<b>You’re Using Trends WRONG</b> <mark>Here’s Why It Fails</mark>",
+      "description": "<i>Most creators copy. You don’t. Bold ideas win.</i>",
+      "unsplashQuery": "viral social media trends"
     },
     {
-      "title": "Boost 200% instantly",
-      "description": "VolumeBoosting pushes every track to its real peak",
-      "logoCaption": "",
-      "unsplashQuery": "audio waveform graphic"
+      "title": "<span style=\"color:#ff0050;background-color:#ffffff\">Grid Layouts</span> <mark>Are DEAD</mark>",
+      "description": "<u>Chaos > Symmetry. Use random angles.</u>",
+      "unsplashQuery": "chaotic photography"
     },
     {
-      "title": "Zero distortion, pure power",
-      "description": "Built‑in limiter keeps sound clean, even at max",
-      "logoCaption": "",
-      "unsplashQuery": "studio monitor speakers"
+      "title": "<b>Text Overlays</b> <mark>Are BORING</mark>",
+      "description": "<em>Move text. Animate it. Make it pop.</em>",
+      "unsplashQuery": "animated text overlays"
     },
     {
-      "title": "Try it now—feel the difference",
-      "description": "",
-      "logoCaption": "",
-      "unsplashQuery": "person enjoying music outdoors"
+      "title": "<span style=\"color:#ff0050;background-color:#ffffff\">Filter Stacking</span> <mark>Is LAME</mark>",
+      "description": "<strong>Replace with AI magic.</strong> <i>One filter. One impact.</i>",
+      "unsplashQuery": "ai photo editing"
+    },
+    {
+      "title": "<b>Followers Don’t Care</b> <mark>Create Your OWN Trend</mark>",
+      "description": "<mark>Post something NO ONE else has.</mark> <i>That’s virality.</i>",
+      "unsplashQuery": "original content creation"
     }
   ],
   "files": [
     "01.jpg",
     "02.jpg",
     "03.jpg",
-    "04.jpg"
+    "04.jpg",
+    "05.jpg"
   ],
   "unsplash": {
-    "query": "headphones on table closeup",
-    "photoId": "A9iVqWIA_AA",
-    "author": "Felipe Bustillo",
+    "query": "viral social media trends",
+    "photoId": "HBkpnDVc_Ic",
+    "author": "Mariia Shalabaieva",
     "slides": [
       {
         "file": "01.jpg",
-        "photoId": "A9iVqWIA_AA",
-        "author": "Felipe Bustillo"
+        "photoId": "HBkpnDVc_Ic",
+        "author": "Mariia Shalabaieva"
       },
       {
         "file": "02.jpg",
-        "photoId": "eybM9n4yrpE",
-        "author": "Pawel Czerwinski"
+        "photoId": "UOBgu1hEj0o",
+        "author": "Colin Lloyd"
       },
       {
         "file": "03.jpg",
-        "photoId": "nLRX1koA8Zo",
-        "author": "wu yi"
+        "photoId": "mRMQwK513hY",
+        "author": "Fab Lentz"
       },
       {
         "file": "04.jpg",
-        "photoId": "g27vS8rxOzs",
-        "author": "Roman"
+        "photoId": "o2g-PaaeD_U",
+        "author": "Abhimanyu Patel"
+      },
+      {
+        "file": "05.jpg",
+        "photoId": "zQo7bJYEVa0",
+        "author": "Walls.io"
       }
     ]
   },
-  "createdAt": "2026-05-16T16:29:52.896Z"
+  "createdAt": "2026-05-16T19:37:07.286Z"
 }

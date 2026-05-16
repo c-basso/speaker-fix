@@ -127,7 +127,6 @@ async function main() {
       backgroundImagePath: bgForSlide,
       title: slide.title,
       description: slide.description,
-      logoCaption: slide.logoCaption || '',
       bg: true,
     });
     slideFiles.push(fileName);

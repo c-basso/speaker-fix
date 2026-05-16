@@ -1,0 +1,51 @@
+{
+  "title": "How to hit 1B views on TikTok",
+  "description": "Stop scrolling past your viral potential. Learn the 0.5‑second hook and perfect posting time to smash 1B views. 🚀 #TikTokTips #ViralVideo #GrowthHack",
+  "topic": "1000 million views viral video",
+  "slideCount": 3,
+  "slides": [
+    {
+      "title": "<strong>You’re leaving 1B views</strong>",
+      "description": "<mark>Here’s the 1‑second fix</mark>",
+      "unsplashQuery": "person looking shocked at phone"
+    },
+    {
+      "title": "<strong>Hook in first 0.5 sec</strong>",
+      "description": "<mark>Make it shocking or funny</mark>",
+      "unsplashQuery": "stopwatch closeup"
+    },
+    {
+      "title": "<strong>Post at peak time</strong>",
+      "description": "<mark>Follow for daily hacks</mark>",
+      "unsplashQuery": "sunset city skyline"
+    }
+  ],
+  "files": [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ],
+  "unsplash": {
+    "query": "phone screen closeup",
+    "photoId": "R6dSBkz32B8",
+    "author": "Ghen Mar Cuaño",
+    "slides": [
+      {
+        "file": "01.jpg",
+        "photoId": "R6dSBkz32B8",
+        "author": "Ghen Mar Cuaño"
+      },
+      {
+        "file": "02.jpg",
+        "photoId": "2Yj6MBvJ0sg",
+        "author": "Stanislav"
+      },
+      {
+        "file": "03.jpg",
+        "photoId": "fT6-YkB0nfg",
+        "author": "Timo Wagner"
+      }
+    ]
+  },
+  "createdAt": "2026-05-16T19:33:11.921Z"
+}

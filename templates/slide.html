@@ -2,8 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
-        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
@@ -30,46 +28,63 @@
             justify-content: center;
             align-items: center;
             padding: 10%;
+            gap: 0.2em;
         }
         .title, .description {
             font-size: 4em;
-            color: #000;
+            line-height: 1.12;
+            color: #1a1a1a;
             font-family: 'Rubik', sans-serif;
+            max-width: 100%;
+            text-shadow:
+                0 0 14px rgba(255, 255, 255, 0.95),
+                0 0 28px rgba(255, 255, 255, 0.85),
+                0 2px 8px rgba(0, 0, 0, 0.25);
         }
-        .title { margin-bottom: 0.1em; }
+        .title { margin-bottom: 0.05em; }
         .bg {
-            background: #fff;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.5);
-            padding: 0.2em 0.5em;
-            border-radius: 0.5em;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            padding: 0.25em 0.55em;
+            border-radius: 0.45em;
+            border: 3px solid rgba(255, 255, 255, 0.9);
         }
-        span { display: inline-block; }
-        .logo {
-            width: 300px;
-            height: 300px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            border-radius: 40px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        .title strong, .title b,
+        .description strong, .description b {
+            font-weight: 900;
+            color: #ff0050;
         }
-        .logo img { width: 100%; height: 100%; object-fit: cover; }
-        .logoCaption { width: 100%; margin-bottom: 8%; }
-        .logoCaption span {
-            font-size: 3em;
-            color: #000;
-            font-family: 'Rubik', sans-serif;
-            text-align: center;
-            display: inline-block;
-            background: #fff;
-            padding: 0.2em 0.5em;
-            border-radius: 0.5em;
-            font-weight: 600;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        .title mark, .description mark {
+            background: linear-gradient(90deg, #ffe203, #ffcc00);
+            color: #1a1a1a;
+            padding: 0.06em 0.14em;
+            border-radius: 0.1em;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+        }
+        .title em, .description em {
+            font-style: italic;
+            color: #280fa0;
+        }
+        .title u, .description u {
+            text-decoration: underline wavy #ff0050;
+            text-underline-offset: 0.1em;
+        }
+        .title s, .description s {
+            color: #666;
+            text-decoration: line-through #ff0050;
+        }
+        .title span, .description span {
+            display: inline;
+            border-radius: 0.12em;
+            padding: 0.04em 0.14em;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
         }
         .overlay {
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.25);
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
+            inset: 0;
         }
     </style>
 </head>
@@ -79,33 +94,11 @@
         <div class="message"></div>
     </div>
     <script>
-        $(document).ready(function () {
-            const params = new URLSearchParams(window.location.search);
-            const title = params.get('title') || '';
-            const description = params.get('description') || '';
-            const image = params.get('image') || '';
-            const logo = params.get('logo') || '';
-            const bg = params.get('bg') || '';
-            const logoCaption = params.get('logoCaption') || '';
-
-            if (logo) {
-                $('.message').append('<div class="logo"><img src="' + logo + '" /></div>');
-            }
-            if (logoCaption) {
-                $('.message').append('<div class="logoCaption"><span>' + logoCaption + '</span></div>');
-            }
-            if (title) {
-                $('.message').append('<div class="title">' + title + '</div>');
-                if (bg) $('.title').last().addClass('bg');
-            }
-            if (description) {
-                $('.message').append('<div class="description">' + description + '</div>');
-                if (bg) $('.description').last().addClass('bg');
-            }
-            if (image) {
-                $('.frame').css('background-image', 'url(' + image + ')');
-            }
-        });
+        const params = new URLSearchParams(window.location.search);
+        const image = params.get('image') || '';
+        if (image) {
+            document.querySelector('.frame').style.backgroundImage = 'url(' + image + ')';
+        }
     </script>
 </body>
 </html>
