@@ -41,7 +41,7 @@ TOPIC: Follow the user's topic exactly. Do not swap in a different product, app,
 ${countRule}
 
 VIRAL RULES (non-negotiable):
-- Slide 1 = scroll-stopping HOOK: tension, surprise, bold claim, or "you're doing X wrong" — not a generic title.
+- Opening slide = scroll-stopping HOOK: tension, surprise, bold claim, or "you're doing X wrong" — not a generic title.
 - One sharp idea per slide. Arc: hook → rapid value beats → punchline/CTA on the last slide.
 - Write like TikTok, not a blog: concrete, specific, emotional. Use numbers, contrasts, "before/after", myths busted, mini-stories.
 - ULTRA SHORT on-slide text (people read in 1–2 seconds):
@@ -49,6 +49,13 @@ VIRAL RULES (non-negotiable):
   - description: 3–12 words, one line only. No second paragraph.
 - description (caption field): first line must hook; last line soft CTA; 2–4 relevant hashtags; no hashtag spam.
 - unsplashQuery: 2–5 concrete English nouns (real photo search), e.g. "cracked iphone screen closeup" — not "success" or "viral background".
+
+ON-SLIDE COPY (title + description on each slide):
+- Never label slides. The carousel order is visible — do NOT prefix with slide numbers or meta labels.
+- BANNED anywhere in title or description: "Slide 1", "Slide 2", "SLIDE 3:", "Frame 1", "Part 2", "Card 3", "Screen 4", "1/5", "Step 1:" as a header (content labels like "Mistake #1" or "Tip #2" are OK).
+- BAD title: "Slide 2: You're posting wrong" → GOOD: "You're posting WRONG"
+- BAD description: "Frame 3 — Use hooks" → GOOD: "Use 15-second hooks only"
+- Each title/description must read as standalone viral copy, not as a deck outline.
 
 FORBIDDEN (never output):
 - Placeholders: "your app/brand/name", "[...]", "X", "TBD", "lorem", "insert", "click here", "link in bio" on slides, "..."
@@ -67,8 +74,8 @@ Reply with valid JSON only — no markdown, no commentary:
   "unsplashQuery": "default background search, 2-5 words",
   "slides": [
     {
-      "title": "on-slide headline",
-      "description": "on-slide subline",
+      "title": "hook or punchline only — never start with Slide/Frame/Part + number",
+      "description": "one short line — no slide numbering",
       "logoCaption": "",
       "unsplashQuery": "optional; use when this slide needs a different visual"
     }
@@ -275,7 +282,7 @@ async function generatePostContent(topic, options = {}) {
     { role: 'system', content: buildSystemPrompt(forcedSlideCount) },
     {
       role: 'user',
-      content: `Make this go viral on TikTok. Topic:\n${topic}`,
+      content: `Make this go viral on TikTok. Do not number slides in title or description (no "Slide 1", "Slide 2", etc.). Topic:\n${topic}`,
     },
   ];
 

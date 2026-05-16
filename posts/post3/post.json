@@ -1,0 +1,66 @@
+{
+  "title": "Why Your Music Is Always Too Quiet",
+  "description": "https://volumeboosting.com/ \nYou’re missing out on the loudest beats because you’re using the wrong tool. Unlock insane volume with a single click. 🎧🔥 #AudioHack #VolumeBoosting #MusicLovers #TechTips",
+  "topic": "max volume sound with https://volumeboosting.com/",
+  "slideCount": 4,
+  "slides": [
+    {
+      "title": "Your phone is MUTING YOU",
+      "description": "Even at max, most apps cap at 70% of true output",
+      "logoCaption": "",
+      "unsplashQuery": "phone speaker closeup"
+    },
+    {
+      "title": "Boost 200% instantly",
+      "description": "VolumeBoosting pushes every track to its real peak",
+      "logoCaption": "",
+      "unsplashQuery": "audio waveform graphic"
+    },
+    {
+      "title": "Zero distortion, pure power",
+      "description": "Built‑in limiter keeps sound clean, even at max",
+      "logoCaption": "",
+      "unsplashQuery": "studio monitor speakers"
+    },
+    {
+      "title": "Try it now—feel the difference",
+      "description": "",
+      "logoCaption": "",
+      "unsplashQuery": "person enjoying music outdoors"
+    }
+  ],
+  "files": [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg"
+  ],
+  "unsplash": {
+    "query": "headphones on table closeup",
+    "photoId": "A9iVqWIA_AA",
+    "author": "Felipe Bustillo",
+    "slides": [
+      {
+        "file": "01.jpg",
+        "photoId": "A9iVqWIA_AA",
+        "author": "Felipe Bustillo"
+      },
+      {
+        "file": "02.jpg",
+        "photoId": "eybM9n4yrpE",
+        "author": "Pawel Czerwinski"
+      },
+      {
+        "file": "03.jpg",
+        "photoId": "nLRX1koA8Zo",
+        "author": "wu yi"
+      },
+      {
+        "file": "04.jpg",
+        "photoId": "g27vS8rxOzs",
+        "author": "Roman"
+      }
+    ]
+  },
+  "createdAt": "2026-05-16T16:29:52.896Z"
+}
