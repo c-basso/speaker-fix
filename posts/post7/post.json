@@ -1,0 +1,62 @@
+{
+  "title": "Focus on yourself. It's not selfish.",
+  "description": "Stop comparing. Start growing. #SelfCare #Mindfulness #GrowthMindset",
+  "topic": "when you focus on yourself",
+  "slideCount": 4,
+  "slides": [
+    {
+      "title": "<b>You're ignoring the real win</b>",
+      "description": "<mark>Self-focus = self-awareness</mark>",
+      "unsplashQuery": "person looking in mirror"
+    },
+    {
+      "title": "<i>Stop chasing others' approval</i>",
+      "description": "<em>Your worth isn't defined by likes</em>",
+      "unsplashQuery": "person holding phone"
+    },
+    {
+      "title": "<u>Know your triggers</u>",
+      "description": "<span style=\"color:#ff0050;background-color:#ffffff\">No more people-pleasing</span>",
+      "unsplashQuery": "hand touching face"
+    },
+    {
+      "title": "<strong>Self-focus = self-respect</strong>",
+      "description": "<mark>Stop apologizing for existing</mark>",
+      "unsplashQuery": "person smiling alone"
+    }
+  ],
+  "files": [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg"
+  ],
+  "unsplash": {
+    "query": "person meditating closeup",
+    "photoId": "OwR9cyMNe4c",
+    "author": "Михаил Секацкий",
+    "slides": [
+      {
+        "file": "01.jpg",
+        "photoId": "OwR9cyMNe4c",
+        "author": "Михаил Секацкий"
+      },
+      {
+        "file": "02.jpg",
+        "photoId": "q8U1YgBaRQk",
+        "author": "NordWood Themes"
+      },
+      {
+        "file": "03.jpg",
+        "photoId": "O2lavz-BH6g",
+        "author": "Inna Gurina"
+      },
+      {
+        "file": "04.jpg",
+        "photoId": "Ll9YOG20UFI",
+        "author": "Nolan Manning"
+      }
+    ]
+  },
+  "createdAt": "2026-05-17T11:51:32.743Z"
+}
