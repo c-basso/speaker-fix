@@ -11,12 +11,24 @@ const {
   MAX_SLIDES,
 } = require('./post-slides.js');
 const { sanitizeSlideHtml } = require('./slide-html.js');
+const { POST_TYPE_APP_AD, defaultSlideCountForType } = require('./post-types.js');
+const {
+  buildTopicSystemPrompt,
+  buildAppAdSystemPrompt,
+  buildUserMessage,
+} = require('./openrouter-prompts.js');
+const {
+  cleanModelResponseText,
+  isGarbageResponse,
+  repairTruncatedJson,
+} = require('./openrouter-response.js');
+const { appendWebsiteToCaption } = require('./app-assets.js');
 
-const DEFAULT_MODEL = 'openrouter/free';
-const MAX_COMPLETION_TOKENS = 8192;
+const DEFAULT_MODEL = process.env.OPENROUTER_MODEL || 'openrouter/free';
+const MAX_COMPLETION_TOKENS = Number(process.env.OPENROUTER_MAX_TOKENS) || 4096;
 
 function extractJson(text, meta = {}) {
-  const trimmed = text.trim();
+  const trimmed = cleanModelResponseText(text);
   let lastErr;
   try {
     return JSON.parse(trimmed);
@@ -37,6 +49,11 @@ function extractJson(text, meta = {}) {
     }
   } catch (err) {
     lastErr = err;
+  }
+
+  if (meta.finishReason === 'length') {
+    const repaired = repairTruncatedJson(trimmed);
+    if (repaired) return repaired;
   }
 
   const tail = trimmed.slice(-400);
@@ -97,65 +114,11 @@ function logOpenRouterExchange(chatRequest, result, text) {
   console.log('[openrouter] =====================================\n');
 }
 
-function buildSystemPrompt(forcedSlideCount) {
-  const countRule = forcedSlideCount
-    ? `Use exactly ${forcedSlideCount} slide(s). Set slideCount to ${forcedSlideCount}.`
-    : `Pick slideCount (${MIN_SLIDES}–${MAX_SLIDES}): minimum slides that carry the idea — 1 for one killer frame; 3–6 for lists, steps, myths, before/after; never pad.`;
-
-  return `You write viral TikTok PHOTO CAROUSEL copy (1080×1920). Text is huge on screen — every word must earn attention.
-
-TOPIC: Follow the user's topic exactly. Do not swap in a different product, app, or brand unless the topic names it.
-
-${countRule}
-
-VIRAL RULES (non-negotiable):
-- Opening slide = scroll-stopping HOOK: tension, surprise, bold claim, or "you're doing X wrong" — not a generic title.
-- One sharp idea per slide. Arc: hook → rapid value beats → punchline/CTA on the last slide.
-- Write like TikTok, not a blog: concrete, specific, emotional. Use numbers, contrasts, "before/after", myths busted, mini-stories.
-- ULTRA SHORT on-slide copy (1–2 second read): title ≈ 2–6 words; description ≈ 3–12 words — count words ignoring HTML tags.
-- Top-level "title" and "description" (TikTok post caption) = plain text only, no HTML.
-- On-slide "title" and "description" inside each slide = HTML fragments (see HTML FORMATTING).
-
-HTML FORMATTING (slides[].title and slides[].description only):
-- MUST be HTML fragments. Wild TikTok energy BUT always readable on photo backgrounds: high contrast only.
-- Allowed tags: <b>, <strong>, <i>, <em>, <u>, <s>, <mark>, <br>, <span style="...">.
-- Every <span> with color MUST also set background-color:#ffffff or background-color:#ffe203 (light pill behind text).
-- Text colors (on light pills only): #ff0050, #280fa0, #0a7c42, #cc4400, #1a1a1a. NEVER #ffffff, #fff, white, #000, or black as text color.
-- Prefer <mark> for yellow highlights (black text). font-size on spans: 1.1em-1.4em max.
-- GOOD: <span style="color:#ff0050;background-color:#ffffff;font-size:1.2em">WRONG</span> <mark>fix now</mark>
-- BAD: <span style="color:#ffffff">...</span> or colored text without background.
-- No <a>, <img>, <div>, <p>, <script>, class names, or markdown. Escape double quotes in JSON as \\".
-- "description" (caption field): plain text; hook first line; 2–4 hashtags; no HTML.
-- unsplashQuery: 2–5 concrete English nouns (real photo search), e.g. "cracked iphone screen closeup" — not "success" or "viral background".
-
-ON-SLIDE COPY (title + description on each slide):
-- Never label slides. The carousel order is visible — do NOT prefix with slide numbers or meta labels.
-- BANNED anywhere in title or description: "Slide 1", "Slide 2", "SLIDE 3:", "Frame 1", "Part 2", "Card 3", "Screen 4", "1/5", "Step 1:" as a header (content labels like "Mistake #1" or "Tip #2" are OK).
-- BAD title: "Slide 2: You're posting wrong" → GOOD: "You're posting WRONG"
-- BAD description: "Frame 3 — Use hooks" → GOOD: "Use 15-second hooks only"
-- Each title/description must read as standalone viral copy, not as a deck outline.
-
-FORBIDDEN (never output):
-- Placeholders: "your app/brand/name", "[...]", "X", "TBD", "lorem", "insert", "click here", "link in bio" on slides, "..."
-- Filler: "In this post", "Did you know", "Stay tuned", "Don't miss out", "Game changer", "Revolutionary"
-- Vague lines: "Amazing tips", "You need this", "Life hack" without specifics
-- Duplicate or near-duplicate slides
-
-Reply with valid JSON only — no markdown, no commentary:
-{
-  "slideCount": ${forcedSlideCount ?? 'integer'},
-  "title": "plain text post title, max 90 chars",
-  "description": "plain text TikTok caption, max 400 chars",
-  "unsplashQuery": "default background search, 2-5 words",
-  "slides": [
-    {
-      "title": "<strong>...</strong> HTML hook — no Slide 1 labels",
-      "description": "<mark>...</mark> HTML subline",
-      "unsplashQuery": "optional per-slide background"
-    }
-  ]
-}
-slides.length must equal slideCount. All user-facing text in English. No unescaped quotes inside JSON strings.`;
+function buildSystemPrompt(postType, forcedSlideCount, appName, compact = false) {
+  if (postType === POST_TYPE_APP_AD) {
+    return buildAppAdSystemPrompt(forcedSlideCount, appName, compact);
+  }
+  return buildTopicSystemPrompt(forcedSlideCount, compact);
 }
 
 function buildChatRequest(messages, variant = 'default') {
@@ -163,11 +126,11 @@ function buildChatRequest(messages, variant = 'default') {
     model: DEFAULT_MODEL,
     messages,
     stream: false,
-    temperature: variant === 'retry' ? 0.4 : 0.7,
+    temperature: variant === 'compact' ? 0.25 : variant === 'retry' ? 0.4 : 0.6,
     maxTokens: MAX_COMPLETION_TOKENS,
   };
 
-  if (variant === 'json_mode') {
+  if (variant === 'json_mode' || variant === 'compact') {
     return {
       ...base,
       responseFormat: { type: 'json_object' },
@@ -198,7 +161,11 @@ function messageTextFromResult(result) {
 
   if (typeof msg.reasoning === 'string' && msg.reasoning.trim()) {
     const reasoning = msg.reasoning.trim();
-    if (reasoning.includes('{') && reasoning.includes('}')) {
+    if (
+      reasoning.includes('{') &&
+      reasoning.includes('}') &&
+      !isGarbageResponse(reasoning)
+    ) {
       return reasoning;
     }
   }
@@ -221,7 +188,11 @@ async function chatSend(client, messages, variant) {
   console.log(`[openrouter] calling API (variant=${variant})…`);
   const result = await client.chat.send({ chatRequest });
   const choice = result?.choices?.[0];
-  const text = messageTextFromResult(result);
+  const rawText = messageTextFromResult(result);
+  const text = cleanModelResponseText(rawText);
+  if (rawText !== text) {
+    console.warn('[openrouter] cleaned tag spam from response');
+  }
   logOpenRouterExchange(chatRequest, result, text);
   return {
     text,
@@ -233,23 +204,25 @@ async function chatSend(client, messages, variant) {
   };
 }
 
-async function chatCompletion(messages) {
+async function chatCompletion(messages, options = {}) {
   const client = await getOpenRouterClient();
-  const variants = ['json_mode', 'default', 'retry'];
+  const variants = options.variants ?? ['json_mode', 'compact', 'default'];
 
   let last = null;
   try {
     for (const variant of variants) {
       last = await chatSend(client, messages, variant);
-      if (last.text?.trim()) {
-        if (variant !== 'default') {
-          console.log(`[openrouter] ok on retry mode: ${variant}`);
+      if (last.text?.trim() && !isGarbageResponse(last.text)) {
+        if (variant !== 'json_mode') {
+          console.log(`[openrouter] ok on variant: ${variant}`);
         }
         return last;
       }
-      console.warn(
-        `[openrouter] empty response (${variant}), ${last.debug}`,
-      );
+      if (last.text?.trim() && isGarbageResponse(last.text)) {
+        console.warn(`[openrouter] garbage response (${variant}), retry…`);
+      } else {
+        console.warn(`[openrouter] empty response (${variant}), ${last.debug}`);
+      }
     }
     return last;
   } catch (err) {
@@ -284,7 +257,7 @@ function resolveSlideCount(data, forcedSlideCount) {
   return fromField ?? fromArray;
 }
 
-function normalizeSlides(data, targetCount) {
+function normalizeSlides(data, targetCount, { extended = false } = {}) {
   let slides = Array.isArray(data.slides) ? [...data.slides] : [];
   if (slides.length === 0) {
     throw new Error('OpenRouter: JSON has no slides');
@@ -297,13 +270,27 @@ function normalizeSlides(data, targetCount) {
     slides.push({ ...slides[slides.length - 1] });
   }
 
-  return slides.map((s) => ({
-    title: sanitizeSlideHtmlField(s.title, 'title'),
-    description: sanitizeSlideHtmlField(s.description, 'description'),
-    unsplashQuery: s.unsplashQuery
-      ? sanitizeSlideField(s.unsplashQuery, 'unsplashQuery')
-      : undefined,
-  }));
+  return slides.map((s) => {
+    const base = {
+      title: sanitizeSlideHtmlField(s.title, 'title'),
+      description: sanitizeSlideHtmlField(s.description, 'description'),
+      unsplashQuery: s.unsplashQuery
+        ? sanitizeSlideField(s.unsplashQuery, 'unsplashQuery')
+        : undefined,
+    };
+    if (!extended) return base;
+    return {
+      ...base,
+      role: s.role ? String(s.role).trim() : undefined,
+      visualDirection: s.visualDirection
+        ? String(s.visualDirection).trim()
+        : undefined,
+      animation: s.animation ? String(s.animation).trim() : undefined,
+      emotionalTrigger: s.emotionalTrigger
+        ? String(s.emotionalTrigger).trim()
+        : undefined,
+    };
+  });
 }
 
 const PLACEHOLDER_PATTERNS = [
@@ -355,65 +342,114 @@ function sanitizeSlideHtmlField(value, field) {
 
 /**
  * @param {string} topic
- * @param {{ slideCount?: number | null }} options — if set, forces count; else OpenRouter decides
+ * @param {{ slideCount?: number | null, postType?: string, appName?: string, websiteUrl?: string | null }} options
  */
 async function generatePostContent(topic, options = {}) {
-  const forcedSlideCount =
-    options.slideCount !== undefined
-      ? options.slideCount
-      : slideCountFromEnv();
+  const postType = options.postType || 'topic';
+  const appName = options.appName || '';
+  const websiteUrl = options.websiteUrl || null;
+  const slideOverride =
+    options.slideCount !== undefined ? options.slideCount : slideCountFromEnv();
+  const forcedSlideCount = defaultSlideCountForType(postType, slideOverride);
+  const extended = postType === POST_TYPE_APP_AD;
 
   console.log(`[openrouter] model=${DEFAULT_MODEL}`);
+  console.log(`[openrouter] postType=${postType}`);
+  if (extended) console.log(`[openrouter] app=${appName}`);
   if (forcedSlideCount != null) {
-    console.log(`[openrouter] slides: fixed ${forcedSlideCount}`);
+    console.log(`[openrouter] slides: ${forcedSlideCount}`);
   } else {
     console.log(`[openrouter] slides: auto (${MIN_SLIDES}…${MAX_SLIDES})`);
   }
 
-  const messages = [
-    { role: 'system', content: buildSystemPrompt(forcedSlideCount) },
-    {
-      role: 'user',
-      content: `Make this go viral on TikTok. Do not number slides in title or description (no "Slide 1", "Slide 2", etc.). Topic:\n${topic}`,
-    },
+  const attempts = [
+    { compact: false, variants: ['json_mode'] },
+    { compact: true, variants: ['json_mode', 'compact'] },
   ];
 
-  const { text, usage, modelUsed, finishReason } = await chatCompletion(messages);
-
-  if (modelUsed) console.log(`[openrouter] used model: ${modelUsed}`);
-  if (usage) {
-    console.log(
-      `[openrouter] tokens: prompt=${usage.promptTokens ?? '?'} completion=${usage.completionTokens ?? '?'}`,
-    );
-  }
-
-  if (!text?.trim()) {
-    throw new Error(
-      'OpenRouter: empty response from free router (try again or pick another model in openrouter.ai)',
-    );
-  }
-
   let data;
-  try {
-    data = extractJson(text, { finishReason: finishReason ?? undefined });
-  } catch (err) {
-    if (err.rawText) {
-      console.error(
-        `[openrouter] parse failed (finish=${err.finishReason ?? '?'}, ${err.rawText.length} chars). Last 500 chars:\n${err.rawText.slice(-500)}`,
+  let usage;
+  let modelUsed;
+  let finishReason;
+
+  for (const attempt of attempts) {
+    const messages = [
+      {
+        role: 'system',
+        content: buildSystemPrompt(
+          postType,
+          forcedSlideCount,
+          appName,
+          attempt.compact,
+        ),
+      },
+      {
+        role: 'user',
+        content: buildUserMessage({
+          postType,
+          topic,
+          appName,
+          compact: attempt.compact,
+        }),
+      },
+    ];
+
+    if (attempt.compact) {
+      console.log('[openrouter] retry with compact HTML + shorter fields…');
+    }
+
+    const result = await chatCompletion(messages, { variants: attempt.variants });
+    usage = result?.usage;
+    modelUsed = result?.modelUsed;
+    finishReason = result?.finishReason;
+
+    if (modelUsed) console.log(`[openrouter] used model: ${modelUsed}`);
+    if (usage) {
+      console.log(
+        `[openrouter] tokens: prompt=${usage.promptTokens ?? '?'} completion=${usage.completionTokens ?? '?'}`,
       );
     }
-    throw err;
+
+    const text = result?.text?.trim();
+    if (!text) continue;
+    if (isGarbageResponse(text)) continue;
+
+    try {
+      data = extractJson(text, { finishReason: finishReason ?? undefined });
+      break;
+    } catch (err) {
+      if (err.rawText) {
+        console.error(
+          `[openrouter] parse failed (finish=${err.finishReason ?? '?'}, ${err.rawText.length} chars). Last 300 chars:\n${err.rawText.slice(-300)}`,
+        );
+      }
+      if (!attempt.compact) continue;
+      throw err;
+    }
+  }
+
+  if (!data) {
+    throw new Error(
+      'OpenRouter: could not parse JSON (model returned garbage or truncated output). Try again or set OPENROUTER_MODEL to another model.',
+    );
   }
   const slideCount = resolveSlideCount(data, forcedSlideCount);
-  const slides = normalizeSlides(data, slideCount);
+  const slides = normalizeSlides(data, slideCount, { extended });
 
   console.log(`[openrouter] chose ${slideCount} slide(s)`);
 
+  const fallbackTopic = extended ? appName : topic;
+
   return {
+    postType,
+    appName: extended ? appName : undefined,
     slideCount,
-    title: String(data.title || topic).trim(),
-    description: String(data.description || '').trim(),
-    unsplashQuery: String(data.unsplashQuery || topic).trim(),
+    title: String(data.title || fallbackTopic).trim(),
+    description: appendWebsiteToCaption(
+      String(data.description || '').trim(),
+      websiteUrl,
+    ),
+    unsplashQuery: String(data.unsplashQuery || fallbackTopic).trim(),
     slides,
   };
 }

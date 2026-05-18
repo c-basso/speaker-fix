@@ -1,51 +1,132 @@
 {
-  "title": "How to hit 1B views on TikTok",
-  "description": "Stop scrolling past your viral potential. Learn the 0.5‑second hook and perfect posting time to smash 1B views. 🚀 #TikTokTips #ViralVideo #GrowthHack",
-  "topic": "1000 million views viral video",
-  "slideCount": 3,
+  "postType": "app-ad",
+  "title": "🔊 Fix Muffled iPhone Speakers Now",
+  "description": "Water? Dust? Drops? Speaker Fix cleans your iPhone speaker in 1 tap. No repair shop needed. #SpeakerFix #iPhoneFix #SoundProblems\nhttps://clearwaveapp.com/",
+  "topic": "App: Speaker Fix\nTagline: Fix your iPhone speaker in one tap\nAudience: iPhone owners with quiet, muffled, or distorted speaker — especially after water, dust, or drops\nProblem: Calls are too quiet, music sounds muddy, people ask you to use speakerphone because they can't hear you\nFeatures: One-tap speaker cleaning; Water eject mode; Instant volume boost without visiting a repair shop\nPlatforms: iOS\nWebsite (optional in CTA/caption): https://clearwaveapp.com/\nExtra angle from user: viral angle about water damage",
+  "slideCount": 7,
   "slides": [
     {
-      "title": "<strong>You’re leaving 1B views</strong>",
-      "description": "<mark>Here’s the 1‑second fix</mark>",
-      "unsplashQuery": "person looking shocked at phone"
+      "title": "<b>💥 Water Ruined Your Speaker?</b>",
+      "description": "<mark>Calls too quiet. Music sounds like underwater. People can’t hear you.</mark>",
+      "role": "hook",
+      "visualDirection": "Close-up of iPhone submerged in water",
+      "animation": "Splash effect with screen shake",
+      "emotionalTrigger": "FOMO"
     },
     {
-      "title": "<strong>Hook in first 0.5 sec</strong>",
-      "description": "<mark>Make it shocking or funny</mark>",
-      "unsplashQuery": "stopwatch closeup"
+      "title": "<i>Muffled Calls?</i> <span style=\"color:#ff0050;background-color:#ffe203\">No one hears you</span>",
+      "description": "<b>Music sounds like a foggy pond.</b> <u>People stare at their phones.</u>",
+      "role": "problem",
+      "visualDirection": "Person holding phone, looking frustrated",
+      "animation": "Subtle screen glow fade",
+      "emotionalTrigger": "curiosity"
     },
     {
-      "title": "<strong>Post at peak time</strong>",
-      "description": "<mark>Follow for daily hacks</mark>",
-      "unsplashQuery": "sunset city skyline"
+      "title": "<strong>Worse: You’re Isolated</strong>",
+      "description": "<mark>People use speakerphone. You’re left out.</mark> <i>No fix? You’re stuck like this.</i>",
+      "role": "agitate",
+      "visualDirection": "Split screen: person isolated vs. others laughing",
+      "animation": "Glitch effect on audio",
+      "emotionalTrigger": "transformation"
+    },
+    {
+      "title": "<b>Speaker Fix</b> <span style=\"color:#0a7c42;background-color:#ffffff\">One tap.</span>",
+      "description": "Clean your speaker. Restore sound. <u>No coding. No tech skills.</u>",
+      "role": "intro",
+      "visualDirection": "App icon with glowing water droplet",
+      "animation": "Slide-in from bottom",
+      "emotionalTrigger": "convenience"
+    },
+    {
+      "title": "<u>Water Eject Mode</u>",
+      "description": "<b>Push a button. Water disappears.</b> <i>Protect your speaker before damage.</i>",
+      "role": "experience",
+      "visualDirection": "Phone screen showing water eject animation",
+      "animation": "Water droplets flying off screen",
+      "emotionalTrigger": "exclusivity"
+    },
+    {
+      "title": "<b>Instant Volume Boost</b>",
+      "description": "<mark>Muddy sound? Clear it now.</mark> <span style=\"color:#cc4400;background-color:#ffffff\">No waiting. No cost.</span>",
+      "role": "experience",
+      "visualDirection": "Before (muffled) → After (clear sound waves)",
+      "animation": "Sudden volume spike visual",
+      "emotionalTrigger": "transformation"
+    },
+    {
+      "title": "<i>Before</i> <mark>Dropped in coffee.</mark> <i>After</i> <u>Crystal clear.</u>",
+      "description": "<b>Your speaker, revived. No repair bill.</b>",
+      "role": "transformation",
+      "visualDirection": "Split image: damaged vs. fixed speaker",
+      "animation": "Slide transition with sound effect",
+      "emotionalTrigger": "FOMO"
     }
   ],
   "files": [
     "01.jpg",
     "02.jpg",
-    "03.jpg"
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg",
+    "07.jpg"
   ],
   "unsplash": {
-    "query": "phone screen closeup",
-    "photoId": "R6dSBkz32B8",
-    "author": "Ghen Mar Cuaño",
+    "query": "water-damaged phone",
+    "photoId": "d2Zc6G6y5H4",
+    "author": "Shuvro Mojumder",
     "slides": [
       {
         "file": "01.jpg",
-        "photoId": "R6dSBkz32B8",
-        "author": "Ghen Mar Cuaño"
+        "photoId": "d2Zc6G6y5H4",
+        "author": "Shuvro Mojumder"
       },
       {
         "file": "02.jpg",
-        "photoId": "2Yj6MBvJ0sg",
-        "author": "Stanislav"
+        "photoId": "3a7SyW0h8vQ",
+        "author": "Laura Rivera"
       },
       {
         "file": "03.jpg",
-        "photoId": "fT6-YkB0nfg",
-        "author": "Timo Wagner"
+        "photoId": "vpoFTzTadLE",
+        "author": "Ashkan Forouzani"
+      },
+      {
+        "file": "04.jpg",
+        "photoId": "D84l6n_2lYM",
+        "author": "Maccy"
+      },
+      {
+        "file": "05.jpg",
+        "photoId": "app-screenshot"
+      },
+      {
+        "file": "06.jpg",
+        "photoId": "app-screenshot"
+      },
+      {
+        "file": "07.jpg",
+        "photoId": "app-screenshot"
       }
     ]
   },
-  "createdAt": "2026-05-16T19:33:11.921Z"
+  "createdAt": "2026-05-18T15:57:25.541Z",
+  "appName": "Speaker Fix",
+  "appId": "speaker-fix",
+  "app": {
+    "id": "speaker-fix",
+    "name": "Speaker Fix",
+    "website": "https://clearwaveapp.com/"
+  },
+  "appAssets": {
+    "logo": "assets/speaker-fix/logo.png",
+    "screenshots": [
+      "assets/speaker-fix/screenshots/1_cover_12_framed.png",
+      "assets/speaker-fix/screenshots/2_clear_12_framed.png",
+      "assets/speaker-fix/screenshots/3_test_12_framed.png",
+      "assets/speaker-fix/screenshots/4_tone_12_framed.png",
+      "assets/speaker-fix/screenshots/5_meter_12_framed.png"
+    ],
+    "website": "https://clearwaveapp.com/"
+  }
 }

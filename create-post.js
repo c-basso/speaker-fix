@@ -13,7 +13,16 @@ const { listPostSlugs } = require('./tasks/posts.js');
 const {
   parseCreatePostArgv,
   createPostUsage,
-} = require('./tasks/post-slides.js');
+  POST_TYPE_APP_AD,
+} = require('./tasks/post-types.js');
+const { resolveCreatePostInput } = require('./tasks/resolve-create-post.js');
+const {
+  resolveAppAssets,
+  slideUsesScreenshotBackground,
+  slideShowsLogo,
+  pickScreenshotForSlide,
+  appendWebsiteToHtml,
+} = require('./tasks/app-assets.js');
 
 const ROOT = __dirname;
 const POSTS_DIR = path.join(ROOT, 'posts');
@@ -45,30 +54,71 @@ async function fitPostImages(slug) {
 }
 
 async function main() {
-  let slideCountOverride;
-  let topic;
+  let parsed;
   try {
-    ({ slideCount: slideCountOverride, topic } = parseCreatePostArgv(
-      process.argv.slice(2),
-    ));
+    parsed = parseCreatePostArgv(process.argv.slice(2));
   } catch (err) {
     console.error(err.message);
     console.error(`\n${createPostUsage()}`);
     process.exit(1);
   }
 
-  if (!topic) {
-    console.error(createPostUsage());
+  let input;
+  try {
+    input = await resolveCreatePostInput(parsed);
+  } catch (err) {
+    console.error(err.message);
+    console.error(`\n${createPostUsage()}`);
     process.exit(1);
   }
+
+  if (input.listApps) {
+    const { listAppsCatalog } = require('./tasks/apps-catalog.js');
+    console.log(await listAppsCatalog());
+    return;
+  }
+
+  const {
+    postType,
+    appName,
+    appId,
+    topic,
+    slideCount: slideCountOverride,
+    appProfile,
+    appAssets: catalogAssets,
+  } = input;
+
+  let appAssets = catalogAssets;
+  if (appProfile && !appAssets) {
+    appAssets = await resolveAppAssets(appProfile, ROOT);
+  }
+  if (appAssets?.logo) console.log(`   logo: ${appAssets.logo}`);
+  if (appAssets?.screenshots?.length) {
+    console.log(`   screenshots: ${appAssets.screenshots.length}`);
+  }
+  if (appAssets?.website) console.log(`   website: ${appAssets.website}`);
+
   const slug = await nextPostSlug();
   const postDir = path.join(POSTS_DIR, slug);
   await fs.mkdir(postDir, { recursive: true });
 
   console.log(`\n=== ${slug} ===`);
-  console.log(`Тема: ${topic}`);
+  console.log(
+    `Тип: ${postType === POST_TYPE_APP_AD ? 'реклама приложения' : 'тема'}`,
+  );
+  if (postType === POST_TYPE_APP_AD) {
+    console.log(`Приложение: ${appName}${appId ? ` (${appId})` : ''}`);
+    if (appProfile?.tagline) console.log(`   ${appProfile.tagline}`);
+  }
+  if (topic) {
+    console.log(
+      postType === POST_TYPE_APP_AD ? `Контекст для AI:\n${topic}` : `Тема: ${topic}`,
+    );
+  }
   if (slideCountOverride != null) {
     console.log(`Слайдов (задано): ${slideCountOverride}`);
+  } else if (postType === POST_TYPE_APP_AD) {
+    console.log('Слайдов: 7 (структура app-ad)');
   } else {
     console.log('Слайдов: OpenRouter выберет сам');
   }
@@ -77,6 +127,9 @@ async function main() {
   console.log('1/4 OpenRouter — title, description, слайды…');
   const content = await generatePostContent(topic, {
     slideCount: slideCountOverride,
+    postType,
+    appName,
+    websiteUrl: appAssets?.website ?? null,
   });
   const slideCount = content.slideCount;
   console.log(`   title: ${content.title}`);
@@ -88,52 +141,97 @@ async function main() {
 
   const bgPath = path.join(postDir, '_background.jpg');
   let primaryBg = null;
-  if (slideCount === 1) {
-    console.log('\n2/4 Unsplash — фон…');
-    primaryBg = await fetchBackgroundPhoto(content.unsplashQuery, bgPath);
+  const needsUnsplash = content.slides.some(
+    (s, idx) => !slideUsesScreenshotBackground(s, appAssets),
+  );
+
+  if (needsUnsplash) {
+    if (slideCount === 1) {
+      console.log('\n2/4 Unsplash — фон…');
+      primaryBg = await fetchBackgroundPhoto(content.unsplashQuery, bgPath);
+    } else {
+      console.log('\n2/4 Unsplash — фон для слайдов без скриншотов аппа…');
+    }
   } else {
-    console.log('\n2/4 Unsplash — фон для каждого слайда…');
+    console.log('\n2/4 Фоны — скриншоты приложения');
   }
 
-  console.log('\n3/4 Playwright — скриншоты слайдов…');
+  console.log('\n3/4 Playwright — слайды…');
   const slideFiles = [];
   const slideBackgrounds = [];
+  let screenshotPick = 0;
+
   for (let i = 0; i < content.slides.length; i += 1) {
     const slide = content.slides[i];
     const fileName = `${padSlide(i + 1)}.jpg`;
     const screenshotPath = path.join(postDir, fileName);
+    const useAppBg = slideUsesScreenshotBackground(slide, appAssets);
     const slideBgQuery = slide.unsplashQuery || content.unsplashQuery;
-    let bgForSlide = bgPath;
-    const customBg =
-      slide.unsplashQuery && slide.unsplashQuery !== content.unsplashQuery;
+    let bgForSlide = null;
+    let appScreenshotBackground = false;
+    let phoneOverlay = '';
 
-    if (customBg) {
-      bgForSlide = path.join(assetsDir, `bg-${padSlide(i + 1)}.jpg`);
-      const bg = await fetchBackgroundPhoto(slideBgQuery, bgForSlide);
-      slideBackgrounds.push(bg);
-    } else if (slideCount > 1) {
-      bgForSlide = path.join(assetsDir, `bg-${padSlide(i + 1)}.jpg`);
-      const bg = await fetchBackgroundPhoto(slideBgQuery, bgForSlide, {
-        index: i,
-      });
-      slideBackgrounds.push(bg);
-    } else if (primaryBg) {
-      slideBackgrounds.push(primaryBg);
+    if (useAppBg) {
+      bgForSlide = pickScreenshotForSlide(appAssets, screenshotPick);
+      screenshotPick += 1;
+      appScreenshotBackground = true;
+      slideBackgrounds.push({ id: 'app-screenshot', localPath: bgForSlide });
+    } else if (
+      slide.role === 'experience' &&
+      appAssets?.screenshots?.length
+    ) {
+      phoneOverlay = pickScreenshotForSlide(appAssets, screenshotPick);
+      screenshotPick += 1;
     }
+
+    if (!useAppBg) {
+      bgForSlide = bgPath;
+      const customBg =
+        slide.unsplashQuery && slide.unsplashQuery !== content.unsplashQuery;
+
+      if (customBg) {
+        bgForSlide = path.join(assetsDir, `bg-${padSlide(i + 1)}.jpg`);
+        const bg = await fetchBackgroundPhoto(slideBgQuery, bgForSlide);
+        slideBackgrounds.push(bg);
+      } else if (slideCount > 1 || !primaryBg) {
+        bgForSlide = path.join(assetsDir, `bg-${padSlide(i + 1)}.jpg`);
+        const bg = await fetchBackgroundPhoto(slideBgQuery, bgForSlide, {
+          index: i,
+        });
+        slideBackgrounds.push(bg);
+      } else if (primaryBg) {
+        slideBackgrounds.push(primaryBg);
+      }
+    }
+
+    let descriptionHtml = slide.description;
+    if (slide.role === 'cta' && appAssets?.website) {
+      descriptionHtml = appendWebsiteToHtml(descriptionHtml, appAssets.website);
+    }
+
+    const logoPath = slideShowsLogo(slide, appAssets) ? appAssets.logo : '';
 
     await takeHtmlPageScreenshot({
       templatePath: TEMPLATE_PATH,
       screenshotPath,
       backgroundImagePath: bgForSlide,
       title: slide.title,
-      description: slide.description,
+      description: descriptionHtml,
+      logoPath,
+      phoneScreenshotPath: phoneOverlay || '',
+      appScreenshotBackground,
       bg: true,
     });
     slideFiles.push(fileName);
-    console.log(`   ✓ ${fileName}`);
+    const parts = [fileName];
+    if (slide.role) parts.push(`[${slide.role}]`);
+    if (logoPath) parts.push('+logo');
+    if (useAppBg) parts.push('+app-bg');
+    console.log(`   ✓ ${parts.join(' ')}`);
   }
 
   const meta = {
+    postType,
     title: content.title,
     description: content.description,
     topic,
@@ -152,6 +250,25 @@ async function main() {
     },
     createdAt: new Date().toISOString(),
   };
+  if (postType === POST_TYPE_APP_AD) {
+    meta.appName = appName;
+    if (appId) meta.appId = appId;
+    if (appProfile) {
+      meta.app = {
+        id: appProfile.id,
+        name: appProfile.name,
+        website: appProfile.website || undefined,
+      };
+    }
+    if (appAssets) {
+      meta.appAssets = {
+        logo: appProfile?.logo || null,
+        screenshots: appProfile?.screenshots || [],
+        website: appAssets.website,
+      };
+    }
+  }
+
   await fs.writeFile(
     path.join(postDir, 'post.json'),
     `${JSON.stringify(meta, null, 2)}\n`,

@@ -1,0 +1,28 @@
+{
+  "apps": [
+    {
+      "id": "speaker-fix",
+      "name": "Speaker Fix",
+      "tagline": "Fix your iPhone speaker in one tap",
+      "audience": "iPhone owners with quiet, muffled, or distorted speaker — especially after water, dust, or drops",
+      "problem": "Calls are too quiet, music sounds muddy, people ask you to use speakerphone because they can't hear you",
+      "features": [
+        "One-tap speaker cleaning",
+        "Water eject mode",
+        "Instant volume boost without visiting a repair shop"
+      ],
+      "platforms": ["iOS"],
+      "defaultPostType": "app-ad",
+      "hashtags": ["#SpeakerFix", "#iPhoneTips", "#PhoneHack"],
+      "logo": "assets/speaker-fix/logo.png",
+      "screenshots": [
+        "assets/speaker-fix/screenshots/1_cover_12_framed.png",
+        "assets/speaker-fix/screenshots/2_clear_12_framed.png",
+        "assets/speaker-fix/screenshots/3_test_12_framed.png",
+        "assets/speaker-fix/screenshots/4_tone_12_framed.png",
+        "assets/speaker-fix/screenshots/5_meter_12_framed.png"
+      ],
+      "website": "https://clearwaveapp.com/"
+    }
+  ]
+}

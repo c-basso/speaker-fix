@@ -10,22 +10,60 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+function fileHref(filePath) {
+  if (!filePath) return '';
+  return pathToFileURL(path.resolve(filePath)).href;
+}
+
 function buildSlideUrl(templatePath, params) {
   const q = new URLSearchParams();
   if (params.image) q.set('image', params.image);
   if (params.bg) q.set('bg', '1');
+  if (params.appBg) q.set('appBg', '1');
 
   const fileUrl = pathToFileURL(path.resolve(templatePath));
   fileUrl.search = q.toString();
   return fileUrl.href;
 }
 
-async function injectSlideHtml(page, { titleHtml, descriptionHtml, bg }) {
+/**
+ * @param {import('playwright').Page} page
+ */
+async function injectSlideHtml(page, options) {
+  const {
+    titleHtml = '',
+    descriptionHtml = '',
+    bg = true,
+    logoPath = '',
+    phoneScreenshotPath = '',
+  } = options;
+
   await page.evaluate(
-    ({ titleHtml: t, descriptionHtml: d, useBg }) => {
+    ({ titleHtml: t, descriptionHtml: d, useBg, logoHref, phoneHref }) => {
       const msg = document.querySelector('.message');
       if (!msg) return;
       msg.innerHTML = '';
+
+      if (logoHref) {
+        const logo = document.createElement('div');
+        logo.className = 'logo';
+        const img = document.createElement('img');
+        img.src = logoHref;
+        img.alt = '';
+        logo.appendChild(img);
+        msg.appendChild(logo);
+      }
+
+      if (phoneHref) {
+        const phone = document.createElement('div');
+        phone.className = 'phone-shot';
+        const img = document.createElement('img');
+        img.src = phoneHref;
+        img.alt = '';
+        phone.appendChild(img);
+        msg.appendChild(phone);
+      }
+
       if (t) {
         const el = document.createElement('div');
         el.className = useBg ? 'title bg' : 'title';
@@ -40,9 +78,11 @@ async function injectSlideHtml(page, { titleHtml, descriptionHtml, bg }) {
       }
     },
     {
-      titleHtml: titleHtml || '',
-      descriptionHtml: descriptionHtml || '',
-      bg: Boolean(bg),
+      titleHtml,
+      descriptionHtml,
+      useBg: Boolean(bg),
+      logoHref: fileHref(logoPath),
+      phoneHref: fileHref(phoneScreenshotPath),
     },
   );
 }
@@ -55,6 +95,9 @@ async function injectSlideHtml(page, { titleHtml, descriptionHtml, bg }) {
  * @param {string} [options.backgroundImagePath]
  * @param {string} [options.title] — HTML fragment
  * @param {string} [options.description] — HTML fragment
+ * @param {string} [options.logoPath]
+ * @param {string} [options.phoneScreenshotPath] — overlay on top of bg
+ * @param {boolean} [options.appScreenshotBackground] — screenshot fills frame
  * @param {boolean} [options.bg]
  */
 async function takeHtmlPageScreenshot(options) {
@@ -65,6 +108,9 @@ async function takeHtmlPageScreenshot(options) {
     backgroundImagePath,
     title,
     description,
+    logoPath,
+    phoneScreenshotPath,
+    appScreenshotBackground = false,
     bg = true,
     width = SLIDE_WIDTH,
     height = SLIDE_HEIGHT,
@@ -73,10 +119,9 @@ async function takeHtmlPageScreenshot(options) {
   const targetUrl =
     url ||
     buildSlideUrl(templatePath, {
-      image: backgroundImagePath
-        ? pathToFileURL(path.resolve(backgroundImagePath)).href
-        : '',
+      image: backgroundImagePath ? fileHref(backgroundImagePath) : '',
       bg: bg ? '1' : '',
+      appBg: appScreenshotBackground ? '1' : '',
     });
 
   console.log('[screenshot]', screenshotPath);
@@ -89,10 +134,16 @@ async function takeHtmlPageScreenshot(options) {
     await page.setViewportSize({ width, height });
     page.setDefaultNavigationTimeout(60_000);
     await page.goto(targetUrl, { waitUntil: 'networkidle' });
+
+    const overlayShot =
+      appScreenshotBackground ? '' : phoneScreenshotPath;
+
     await injectSlideHtml(page, {
       titleHtml: title,
       descriptionHtml: description,
       bg,
+      logoPath,
+      phoneScreenshotPath: overlayShot,
     });
     await sleep(500);
     await page.screenshot({ path: screenshotPath, type: 'jpeg', quality: 90 });
@@ -107,4 +158,5 @@ module.exports = {
   buildSlideUrl,
   takeHtmlPageScreenshot,
   injectSlideHtml,
+  fileHref,
 };

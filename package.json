@@ -6,6 +6,7 @@
         "post": "node post.js",
         "posts:fit": "node scripts/fit-images.js",
         "create-post": "node create-post.js",
+        "list-apps": "node scripts/list-apps.js",
         "check-secrets": "node scripts/check-secrets.js"
     },
     "dependencies": {
