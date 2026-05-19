@@ -23,6 +23,32 @@
         "assets/speaker-fix/screenshots/5_meter_12_framed.png"
       ],
       "website": "https://clearwaveapp.com/"
+    },
+    {
+      "id": "extract-audio",
+      "name": "Extract Audio from Video",
+      "tagline": "Convert video to MP3 on iPhone in seconds",
+      "audience": "iPhone users who want music, voice, or lecture audio from videos without uploading files to the web",
+      "problem": "Online converters are slow, sketchy, and upload your private videos — you just need an MP3 from a clip on your phone",
+      "features": [
+        "Video to MP3 on device (MP4, MOV)",
+        "Share Sheet from Photos or Files",
+        "Trim before export",
+        "Private on-device processing",
+        "Free core extraction, optional in-app purchases"
+      ],
+      "platforms": ["iOS"],
+      "defaultPostType": "app-ad",
+      "hashtags": ["#ExtractAudio", "#VideoToMP3", "#iPhoneTips", "#MP3"],
+      "logo": "assets/extract-audio/logo.png",
+      "screenshots": [
+        "assets/extract-audio/screenshots/1_cover_12_framed.png",
+        "assets/extract-audio/screenshots/2_extract_12_framed.png",
+        "assets/extract-audio/screenshots/3_trim_12_framed.png",
+        "assets/extract-audio/screenshots/4_share_12_framed.png",
+        "assets/extract-audio/screenshots/5_store_12_framed.png"
+      ],
+      "website": "https://extractaudioapp.com/"
     }
   ]
 }
