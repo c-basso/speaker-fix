@@ -1,0 +1,111 @@
+{
+  "postType": "app-ad",
+  "title": "Stop posting messy photos! 📸",
+  "description": "Turn any iPhone photo into a professional portrait in seconds. Blur backgrounds or protect privacy instantly. ✨ Download Make Blur on iOS! #iphonehacks #photography #photoediting #makeblur\nhttps://MakeBlur.com/",
+  "topic": "App: Make Blur\nTagline: Blur background and faces on iPhone in seconds\nAudience: iPhone users who want portrait-style background blur, creative photo effects, or privacy-safe sharing without complicated editors\nProblem: Portrait mode only works on some shots, other blur apps are paywalled or confusing, and you need to blur backgrounds or faces before posting group photos\nFeatures: Auto-detect background blur in seconds; Face blur for privacy on group shots; Seven blur styles: Bokeh, motion, Gaussian, ghosting, pixelate, hexagonal, crystalize; Custom brush to blur exactly where you want; Freemium — core tools free, optional in-app purchases\nPlatforms: iOS\nWebsite (optional in CTA/caption): https://MakeBlur.com/",
+  "slideCount": 5,
+  "slides": [
+    {
+      "title": "Why is my photo <b>so messy?</b>",
+      "description": "<span style=\"background-color:#ffe203;color:#ff0050\">Stop ignoring the background</span>",
+      "unsplashQuery": "messy street background",
+      "role": "hook",
+      "visualDirection": "Distracting, cluttered street background behind a person",
+      "animation": "Fast zoom into the cluttered background",
+      "emotionalTrigger": "curiosity"
+    },
+    {
+      "title": "Portrait mode <i>failed you?</i>",
+      "description": "No bokeh? <s>No problem.</s>",
+      "unsplashQuery": "portrait photography bokeh",
+      "role": "problem",
+      "visualDirection": "Side-by-side comparison: flat photo vs blurry photo",
+      "animation": "Smooth sliding transition between images",
+      "emotionalTrigger": "transformation"
+    },
+    {
+      "title": "7 <strong>stunning</strong> styles",
+      "description": "<span style=\"background-color:#ffffff;color:#ff0050\">Bokeh, Motion, & more</span>",
+      "unsplashQuery": "abstract colorful blur",
+      "role": "experience",
+      "visualDirection": "Rapid montage of different blur effects applied to one photo",
+      "animation": "Quick rhythmic cuts to music beat",
+      "emotionalTrigger": "convenience"
+    },
+    {
+      "title": "Protect <u>privacy</u> instantly",
+      "description": "<span style=\"background-color:#ffffff;color:#ff0050\">Blur faces in one tap</span>",
+      "unsplashQuery": "crowd of people",
+      "role": "agitate",
+      "visualDirection": "Group photo with faces being quickly pixelated/blurred",
+      "animation": "Tap effect on the screen",
+      "emotionalTrigger": "social proof"
+    },
+    {
+      "title": "Get <b>Make Blur</b> now",
+      "description": "Available on <strong>iOS</strong> 📲",
+      "unsplashQuery": "iphone app mockup",
+      "role": "cta",
+      "visualDirection": "Clean iPhone mockup showing the app interface",
+      "animation": "Gentle pulse on the download button",
+      "emotionalTrigger": "convenience"
+    }
+  ],
+  "files": [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg"
+  ],
+  "unsplash": {
+    "query": "iphone photography aesthetic",
+    "photoId": "i1UvtVXbJ-Y",
+    "author": "Coekieshots",
+    "slides": [
+      {
+        "file": "01.jpg",
+        "photoId": "i1UvtVXbJ-Y",
+        "author": "Coekieshots"
+      },
+      {
+        "file": "02.jpg",
+        "photoId": "ZhBGD4vykCU",
+        "author": "Fakhri Labib"
+      },
+      {
+        "file": "03.jpg",
+        "photoId": "app-screenshot"
+      },
+      {
+        "file": "04.jpg",
+        "photoId": "sUXXO3xPBYo",
+        "author": "Rob Curran"
+      },
+      {
+        "file": "05.jpg",
+        "photoId": "voRfgeyiBKA",
+        "author": "Mediamodifier"
+      }
+    ]
+  },
+  "createdAt": "2026-05-21T09:54:31.213Z",
+  "appName": "Make Blur",
+  "appId": "make-blur",
+  "app": {
+    "id": "make-blur",
+    "name": "Make Blur",
+    "website": "https://MakeBlur.com/"
+  },
+  "appAssets": {
+    "logo": "assets/make-blur/logo.webp",
+    "screenshots": [
+      "assets/make-blur/screenshots/1_box_12_framed.webp",
+      "assets/make-blur/screenshots/2_motion_12_framed.webp",
+      "assets/make-blur/screenshots/3_ghost_12_framed.webp",
+      "assets/make-blur/screenshots/4_crystal_12_framed.webp",
+      "assets/make-blur/screenshots/5_ghost_alt_12_framed.webp"
+    ],
+    "website": "https://MakeBlur.com/"
+  }
+}

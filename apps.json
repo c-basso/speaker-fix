@@ -49,6 +49,32 @@
         "assets/extract-audio/screenshots/5_store_12_framed.png"
       ],
       "website": "https://ExtractAudioApp.com/"
+    },
+    {
+      "id": "make-blur",
+      "name": "Make Blur",
+      "tagline": "Blur background and faces on iPhone in seconds",
+      "audience": "iPhone users who want portrait-style background blur, creative photo effects, or privacy-safe sharing without complicated editors",
+      "problem": "Portrait mode only works on some shots, other blur apps are paywalled or confusing, and you need to blur backgrounds or faces before posting group photos",
+      "features": [
+        "Auto-detect background blur in seconds",
+        "Face blur for privacy on group shots",
+        "Seven blur styles: Bokeh, motion, Gaussian, ghosting, pixelate, hexagonal, crystalize",
+        "Custom brush to blur exactly where you want",
+        "Freemium — core tools free, optional in-app purchases"
+      ],
+      "platforms": ["iOS"],
+      "defaultPostType": "app-ad",
+      "hashtags": ["#MakeBlur", "#BlurBackground", "#iPhonePhoto", "#Bokeh", "#PhotoEdit"],
+      "logo": "assets/make-blur/logo.webp",
+      "screenshots": [
+        "assets/make-blur/screenshots/1_box_12_framed.webp",
+        "assets/make-blur/screenshots/2_motion_12_framed.webp",
+        "assets/make-blur/screenshots/3_ghost_12_framed.webp",
+        "assets/make-blur/screenshots/4_crystal_12_framed.webp",
+        "assets/make-blur/screenshots/5_ghost_alt_12_framed.webp"
+      ],
+      "website": "https://MakeBlur.com/"
     }
   ]
 }
