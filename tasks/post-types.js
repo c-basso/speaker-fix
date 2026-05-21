@@ -1,6 +1,11 @@
 'use strict';
 
-const { slideCountFromEnv, clampSlideCount } = require('./post-slides.js');
+const {
+  slideCountFromEnv,
+  clampSlideCount,
+  MIN_SLIDES,
+  MAX_SLIDES,
+} = require('./post-slides.js');
 
 const POST_TYPE_TOPIC = 'topic';
 const POST_TYPE_APP_AD = 'app-ad';
@@ -123,7 +128,7 @@ function createPostUsage() {
     '  --type app-ad    force app ad (with --app or apps.json ref)',
     '',
     'Flags:',
-    `  --slides N   override slide count (app-ad default: ${APP_AD_SLIDE_COUNT})`,
+    `  --slides N   force slide count (${MIN_SLIDES}–${MAX_SLIDES}; otherwise AI chooses)`,
     '  --list-apps  print apps from apps.json',
     '  APP_ID or APP_NAME in .env',
     '',
@@ -134,9 +139,8 @@ function createPostUsage() {
   ].join('\n');
 }
 
-function defaultSlideCountForType(postType, slideCountOverride) {
+function defaultSlideCountForType(_postType, slideCountOverride) {
   if (slideCountOverride != null) return slideCountOverride;
-  if (postType === POST_TYPE_APP_AD) return APP_AD_SLIDE_COUNT;
   return null;
 }
 

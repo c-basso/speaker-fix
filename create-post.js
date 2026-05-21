@@ -117,8 +117,6 @@ async function main() {
   }
   if (slideCountOverride != null) {
     console.log(`Слайдов (задано): ${slideCountOverride}`);
-  } else if (postType === POST_TYPE_APP_AD) {
-    console.log('Слайдов: 7 (структура app-ad)');
   } else {
     console.log('Слайдов: OpenRouter выберет сам');
   }

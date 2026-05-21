@@ -1,7 +1,6 @@
 'use strict';
 
 const { MIN_SLIDES, MAX_SLIDES } = require('./post-slides.js');
-const { APP_AD_SLIDE_COUNT } = require('./post-types.js');
 
 function buildHtmlFormattingBlock(compact = false) {
   if (compact) {
@@ -59,7 +58,7 @@ function buildJsonSchema(forcedSlideCount, { extended = false, compact = false }
     ${slideFields}
   ]
 }
-slides.length must equal slideCount. English only. Compact copy — do not ramble.`;
+slides.length must equal slideCount. Every slide MUST have non-empty title AND description (real copy, not stubs). English only. Compact copy — do not ramble.`;
 }
 
 function buildTopicSystemPrompt(forcedSlideCount, compact = false) {
@@ -79,14 +78,20 @@ ${buildJsonSchema(forcedSlideCount, { compact })}`;
 }
 
 function buildAppAdSystemPrompt(forcedSlideCount, appName, compact = false) {
-  const count = forcedSlideCount ?? APP_AD_SLIDE_COUNT;
+  const countRule = forcedSlideCount
+    ? `Exactly ${forcedSlideCount} slide(s). slideCount=${forcedSlideCount}.`
+    : `You choose slideCount (${MIN_SLIDES}–${MAX_SLIDES}): as few slides as tell the story well (often 4–7). slides.length must equal slideCount.`;
+
+  const roleRule = forcedSlideCount
+    ? `Use these roles in order across all slides:\nhook → problem → agitate → intro → experience → transformation → cta`
+    : `Assign each slide a role. Start with hook; end with cta when slideCount ≥ 2. Fill the middle with a compressed story arc (problem, agitate, intro, experience, transformation) — skip roles you do not need, never repeat empty stubs.`;
 
   return `Viral carousel ad for mobile app "${appName}" (1080×1920). Native TikTok feel — NOT corporate ads.
 
 Goal: attention, shares, installs. Audience: people with the problem "${appName}" solves.
 
-Exactly ${count} slides (slideCount=${count}), roles in order:
-hook → problem → agitate → intro (reveal app) → experience (2-3 features) → transformation → cta
+${countRule}
+${roleRule}
 
 Per slide: short HTML title + description; brief visualDirection/animation/emotionalTrigger; unsplashQuery (2-5 words).
 
@@ -94,9 +99,11 @@ Top-level title + description = plain text caption with hashtags. No HTML in cap
 
 ${buildHtmlFormattingBlock(compact)}
 
-FORBIDDEN: [APP NAME] placeholder, Slide N labels, tag spam, unclosed tags, long paragraphs.
+FORBIDDEN: empty title/description on any slide, role-only stubs, [APP NAME] placeholder, Slide N labels, tag spam, unclosed tags, long paragraphs.
 
-${buildJsonSchema(count, { extended: true, compact })}`;
+Every slide needs a complete title + description before moving to the next slide.
+
+${buildJsonSchema(forcedSlideCount, { extended: true, compact })}`;
 }
 
 function buildUserMessage({ postType, topic, appName, compact = false }) {

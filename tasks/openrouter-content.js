@@ -12,6 +12,16 @@ const {
 } = require('./post-slides.js');
 const { sanitizeSlideHtml } = require('./slide-html.js');
 const { POST_TYPE_APP_AD, defaultSlideCountForType } = require('./post-types.js');
+
+const APP_AD_ROLES = [
+  'hook',
+  'problem',
+  'agitate',
+  'intro',
+  'experience',
+  'transformation',
+  'cta',
+];
 const {
   buildTopicSystemPrompt,
   buildAppAdSystemPrompt,
@@ -257,6 +267,23 @@ function resolveSlideCount(data, forcedSlideCount) {
   return fromField ?? fromArray;
 }
 
+function slideHasContent(slide) {
+  const title = plainTextFromHtml(sanitizeSlideHtml(slide?.title));
+  const description = plainTextFromHtml(sanitizeSlideHtml(slide?.description));
+  return Boolean(title || description);
+}
+
+function lastSlideWithContent(slides) {
+  for (let i = slides.length - 1; i >= 0; i -= 1) {
+    if (slideHasContent(slides[i])) return slides[i];
+  }
+  return slides[slides.length - 1];
+}
+
+function countEmptySlides(slides) {
+  return slides.filter((s) => !slideHasContent(s)).length;
+}
+
 function normalizeSlides(data, targetCount, { extended = false } = {}) {
   let slides = Array.isArray(data.slides) ? [...data.slides] : [];
   if (slides.length === 0) {
@@ -267,10 +294,15 @@ function normalizeSlides(data, targetCount, { extended = false } = {}) {
     slides = slides.slice(0, targetCount);
   }
   while (slides.length < targetCount) {
-    slides.push({ ...slides[slides.length - 1] });
+    const donor = lastSlideWithContent(slides);
+    const pad = { ...donor };
+    if (extended && APP_AD_ROLES[slides.length]) {
+      pad.role = APP_AD_ROLES[slides.length];
+    }
+    slides.push(pad);
   }
 
-  return slides.map((s) => {
+  return slides.map((s, index) => {
     const base = {
       title: sanitizeSlideHtmlField(s.title, 'title'),
       description: sanitizeSlideHtmlField(s.description, 'description'),
@@ -279,9 +311,13 @@ function normalizeSlides(data, targetCount, { extended = false } = {}) {
         : undefined,
     };
     if (!extended) return base;
+    const role =
+      (s.role ? String(s.role).trim() : '') ||
+      APP_AD_ROLES[index] ||
+      APP_AD_ROLES[APP_AD_ROLES.length - 1];
     return {
       ...base,
-      role: s.role ? String(s.role).trim() : undefined,
+      role,
       visualDirection: s.visualDirection
         ? String(s.visualDirection).trim()
         : undefined,
@@ -416,7 +452,6 @@ async function generatePostContent(topic, options = {}) {
 
     try {
       data = extractJson(text, { finishReason: finishReason ?? undefined });
-      break;
     } catch (err) {
       if (err.rawText) {
         console.error(
@@ -426,6 +461,21 @@ async function generatePostContent(topic, options = {}) {
       if (!attempt.compact) continue;
       throw err;
     }
+
+    const slideCountProbe = resolveSlideCount(data, forcedSlideCount);
+    const slidesProbe = normalizeSlides(data, slideCountProbe, { extended });
+    const emptyCount = countEmptySlides(slidesProbe);
+    if (emptyCount > 0) {
+      console.warn(
+        `[openrouter] ${emptyCount}/${slidesProbe.length} slide(s) missing title/description` +
+          (finishReason === 'length' ? ' (response truncated)' : ''),
+      );
+      if (!attempt.compact) continue;
+      throw new Error(
+        `OpenRouter: ${emptyCount} slide(s) have empty copy. Try again or set OPENROUTER_MODEL.`,
+      );
+    }
+    break;
   }
 
   if (!data) {
