@@ -1,0 +1,69 @@
+{
+  "postType": "topic",
+  "title": "Self-focus isn't selfish. It's survival.",
+  "description": "Prioritize your needs. You can't pour from an empty cup. <mark style=\"background-color:#ff0050\">You matter.</mark>",
+  "topic": "when you focus on yourself",
+  "slideCount": 5,
+  "slides": [
+    {
+      "title": "<strong>Self-focus isn't selfish.</strong>",
+      "description": "Prioritize your needs. <mark>You can't pour from empty.</mark>"
+    },
+    {
+      "title": "<strong>Self-care isn't optional.</strong>",
+      "description": "Invest in YOU daily. <b>Small steps.</b> Big results."
+    },
+    {
+      "title": "<strong>Your worth isn't a mirror.</strong>",
+      "description": "Stop comparing. <i>Your journey is unique.</i>"
+    },
+    {
+      "title": "<strong>Comparison kills focus.</strong>",
+      "description": "Focus on your path. <strong>Others' highlights ≠ your lows.</strong>"
+    },
+    {
+      "title": "<strong>Action > perfection.</strong>",
+      "description": "Start now. <mark>Done is better than perfect.</mark>"
+    }
+  ],
+  "files": [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg"
+  ],
+  "unsplash": {
+    "query": "self-care",
+    "photoId": "B5Thyv8d3mo",
+    "author": "Toa Heftiba",
+    "slides": [
+      {
+        "file": "01.jpg",
+        "photoId": "B5Thyv8d3mo",
+        "author": "Toa Heftiba"
+      },
+      {
+        "file": "02.jpg",
+        "photoId": "JZt5OucOU1o",
+        "author": "Ava Sol"
+      },
+      {
+        "file": "03.jpg",
+        "photoId": "TOZqUHD8L38",
+        "author": "Maddi Bazzocco"
+      },
+      {
+        "file": "04.jpg",
+        "photoId": "KKkPgdLwKjo",
+        "author": "Jon Tyson"
+      },
+      {
+        "file": "05.jpg",
+        "photoId": "FoG8lotg7AA",
+        "author": "Jen P."
+      }
+    ]
+  },
+  "createdAt": "2026-05-24T20:42:25.236Z"
+}
