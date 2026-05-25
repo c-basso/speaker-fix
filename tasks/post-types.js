@@ -9,7 +9,10 @@ const {
 
 const POST_TYPE_TOPIC = 'topic';
 const POST_TYPE_APP_AD = 'app-ad';
+const POST_TYPE_INFOGRAPHIC = 'infographic';
 const APP_AD_SLIDE_COUNT = 7;
+/** Карусель инфографики для TikTok (6–7 слайдов) */
+const INFOGRAPHIC_SLIDE_COUNT = 7;
 
 const POST_TYPE_ALIASES = new Map([
   ['topic', POST_TYPE_TOPIC],
@@ -18,6 +21,9 @@ const POST_TYPE_ALIASES = new Map([
   ['app', POST_TYPE_APP_AD],
   ['ad', POST_TYPE_APP_AD],
   ['реклама', POST_TYPE_APP_AD],
+  ['infographic', POST_TYPE_INFOGRAPHIC],
+  ['info', POST_TYPE_INFOGRAPHIC],
+  ['инфографика', POST_TYPE_INFOGRAPHIC],
 ]);
 
 function normalizePostType(raw) {
@@ -25,7 +31,7 @@ function normalizePostType(raw) {
   const type = POST_TYPE_ALIASES.get(key);
   if (!type) {
     throw new Error(
-      `Unknown post type "${raw}". Use: topic, app-ad (aliases: ad, app, реклама)`,
+      `Unknown post type "${raw}". Use: topic, app-ad, infographic (aliases: ad, info, инфографика)`,
     );
   }
   return type;
@@ -124,8 +130,9 @@ function createPostUsage() {
     '  npm run create-post -- 1 "optional extra angle for this post"',
     '',
     'Post types:',
-    '  --type topic     general viral carousel (default without app ref)',
-    '  --type app-ad    force app ad (with --app or apps.json ref)',
+    '  --type topic        general viral carousel (default without app ref)',
+    '  --type app-ad       app ad with Unsplash + HTML slides',
+    `  --type infographic  AI infographic carousel (default ${INFOGRAPHIC_SLIDE_COUNT} slides → posts/postN/)`,
     '',
     'Flags:',
     `  --slides N   force slide count (${MIN_SLIDES}–${MAX_SLIDES}; otherwise AI chooses)`,
@@ -136,17 +143,22 @@ function createPostUsage() {
     '  npm run create-post -- "5 signs your mic is broken"',
     '  npm run create-post -- 1',
     '  npm run create-post -- --app speaker-fix "water damage angle"',
+    '  npm run create-post -- --type infographic "foods that hurt sperm health"',
+    '  npm run generate-infographic -- "sperm health" --auto',
   ].join('\n');
 }
 
-function defaultSlideCountForType(_postType, slideCountOverride) {
+function defaultSlideCountForType(postType, slideCountOverride) {
   if (slideCountOverride != null) return slideCountOverride;
+  if (postType === POST_TYPE_INFOGRAPHIC) return INFOGRAPHIC_SLIDE_COUNT;
   return null;
 }
 
 module.exports = {
   POST_TYPE_TOPIC,
   POST_TYPE_APP_AD,
+  POST_TYPE_INFOGRAPHIC,
+  INFOGRAPHIC_SLIDE_COUNT,
   APP_AD_SLIDE_COUNT,
   normalizePostType,
   parseCreatePostArgv,

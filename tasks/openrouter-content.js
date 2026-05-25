@@ -137,10 +137,13 @@ function buildChatRequest(messages, variant = 'default') {
     messages,
     stream: false,
     temperature: variant === 'compact' ? 0.25 : variant === 'retry' ? 0.4 : 0.6,
-    maxTokens: MAX_COMPLETION_TOKENS,
+    maxTokens:
+      variant === 'compact'
+        ? Math.min(3072, MAX_COMPLETION_TOKENS)
+        : MAX_COMPLETION_TOKENS,
   };
 
-  if (variant === 'json_mode' || variant === 'compact') {
+  if (variant === 'json_mode') {
     return {
       ...base,
       responseFormat: { type: 'json_object' },
@@ -148,6 +151,15 @@ function buildChatRequest(messages, variant = 'default') {
   }
 
   return base;
+}
+
+function choiceProviderError(choice) {
+  const err = choice?.error;
+  if (!err) return null;
+  const msg =
+    (typeof err === 'string' ? err : err.message) ||
+    JSON.stringify(err).slice(0, 300);
+  return new Error(msg || 'Provider returned error');
 }
 
 function messageTextFromResult(result) {
@@ -195,9 +207,16 @@ function describeEmptyResult(result) {
 
 async function chatSend(client, messages, variant) {
   const chatRequest = buildChatRequest(messages, variant);
-  console.log(`[openrouter] calling API (variant=${variant})…`);
+  console.log(
+    `[openrouter] calling API (variant=${variant}, model=${chatRequest.model})…`,
+  );
   const result = await client.chat.send({ chatRequest });
   const choice = result?.choices?.[0];
+  const providerErr = choiceProviderError(choice);
+  if (providerErr) {
+    providerErr.model = result?.model || chatRequest.model;
+    throw providerErr;
+  }
   const rawText = messageTextFromResult(result);
   const text = cleanModelResponseText(rawText);
   if (rawText !== text) {
@@ -216,28 +235,42 @@ async function chatSend(client, messages, variant) {
 
 async function chatCompletion(messages, options = {}) {
   const client = await getOpenRouterClient();
-  const variants = options.variants ?? ['json_mode', 'compact', 'default'];
+  const variants = options.variants ?? ['json_mode', 'default', 'compact'];
 
   let last = null;
-  try {
-    for (const variant of variants) {
+  let lastErr = null;
+
+  for (const variant of variants) {
+    try {
       last = await chatSend(client, messages, variant);
-      if (last.text?.trim() && !isGarbageResponse(last.text)) {
-        if (variant !== 'json_mode') {
-          console.log(`[openrouter] ok on variant: ${variant}`);
-        }
-        return last;
+    } catch (err) {
+      lastErr = err;
+      console.warn(
+        `[openrouter] ${variant} failed: ${formatSdkError(err, { variant, model: DEFAULT_MODEL }).message}`,
+      );
+      if (variant !== variants[variants.length - 1]) {
+        console.warn('[openrouter] retrying with next variant…');
       }
-      if (last.text?.trim() && isGarbageResponse(last.text)) {
-        console.warn(`[openrouter] garbage response (${variant}), retry…`);
-      } else {
-        console.warn(`[openrouter] empty response (${variant}), ${last.debug}`);
-      }
+      continue;
     }
-    return last;
-  } catch (err) {
-    throw formatSdkError(err);
+
+    if (last.text?.trim() && !isGarbageResponse(last.text)) {
+      if (variant !== 'json_mode') {
+        console.log(`[openrouter] ok on variant: ${variant}`);
+      }
+      return last;
+    }
+    if (last.text?.trim() && isGarbageResponse(last.text)) {
+      console.warn(`[openrouter] garbage response (${variant}), retry…`);
+    } else {
+      console.warn(`[openrouter] empty response (${variant}), ${last.debug}`);
+    }
   }
+
+  if (lastErr) {
+    throw formatSdkError(lastErr, { model: DEFAULT_MODEL });
+  }
+  return last;
 }
 
 function resolveSlideCount(data, forcedSlideCount) {
@@ -399,8 +432,8 @@ async function generatePostContent(topic, options = {}) {
   }
 
   const attempts = [
-    { compact: false, variants: ['json_mode'] },
-    { compact: true, variants: ['json_mode', 'compact'] },
+    { compact: false, variants: ['json_mode', 'default'] },
+    { compact: true, variants: ['default', 'compact'] },
   ];
 
   let data;

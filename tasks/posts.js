@@ -30,6 +30,16 @@ function mediaKind(filename) {
   return null;
 }
 
+async function nextPostSlug(postsDir) {
+  const slugs = await listPostSlugs(postsDir);
+  let max = 0;
+  for (const s of slugs) {
+    const m = /^post(\d+)$/i.exec(s);
+    if (m) max = Math.max(max, Number(m[1]));
+  }
+  return `post${max + 1}`;
+}
+
 async function listPostSlugs(postsDir) {
   let entries;
   try {
@@ -146,6 +156,7 @@ module.exports = {
   publicBaseUrl,
   joinPublicUrl,
   listPostSlugs,
+  nextPostSlug,
   scanPostFolder,
   checkUrlAccessible,
   verifyPublicUrls,

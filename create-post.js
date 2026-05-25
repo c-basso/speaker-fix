@@ -9,12 +9,15 @@ require('./load-env');
 const { generatePostContent } = require('./tasks/openrouter-content.js');
 const { fetchBackgroundPhoto } = require('./tasks/unsplash-photos.js');
 const { takeHtmlPageScreenshot } = require('./tasks/render-slide.js');
-const { listPostSlugs } = require('./tasks/posts.js');
+const { nextPostSlug } = require('./tasks/posts.js');
 const {
   parseCreatePostArgv,
   createPostUsage,
   POST_TYPE_APP_AD,
+  POST_TYPE_INFOGRAPHIC,
+  INFOGRAPHIC_SLIDE_COUNT,
 } = require('./tasks/post-types.js');
+const { createInfographicPost } = require('./tasks/create-infographic-post.js');
 const { resolveCreatePostInput } = require('./tasks/resolve-create-post.js');
 const {
   resolveAppAssets,
@@ -27,16 +30,6 @@ const {
 const ROOT = __dirname;
 const POSTS_DIR = path.join(ROOT, 'posts');
 const TEMPLATE_PATH = path.join(ROOT, 'templates', 'slide.html');
-
-async function nextPostSlug() {
-  const slugs = await listPostSlugs(POSTS_DIR);
-  let max = 0;
-  for (const s of slugs) {
-    const m = /^post(\d+)$/i.exec(s);
-    if (m) max = Math.max(max, Number(m[1]));
-  }
-  return `post${max + 1}`;
-}
 
 function padSlide(n) {
   return String(n).padStart(2, '0');
@@ -98,14 +91,37 @@ async function main() {
   }
   if (appAssets?.website) console.log(`   website: ${appAssets.website}`);
 
-  const slug = await nextPostSlug();
+  const slug = await nextPostSlug(POSTS_DIR);
   const postDir = path.join(POSTS_DIR, slug);
   await fs.mkdir(postDir, { recursive: true });
 
   console.log(`\n=== ${slug} ===`);
-  console.log(
-    `Тип: ${postType === POST_TYPE_APP_AD ? 'реклама приложения' : 'тема'}`,
-  );
+  const typeLabel =
+    postType === POST_TYPE_APP_AD
+      ? 'реклама приложения'
+      : postType === POST_TYPE_INFOGRAPHIC
+        ? 'инфографика (AI image)'
+        : 'тема';
+  console.log(`Тип: ${typeLabel}`);
+
+  if (postType === POST_TYPE_INFOGRAPHIC) {
+    if (topic) console.log(`Тема: ${topic}`);
+    if (slideCountOverride != null) {
+      console.log(`Слайдов (задано): ${slideCountOverride}`);
+    } else {
+      console.log(`Слайдов: ${INFOGRAPHIC_SLIDE_COUNT} (карусель infographic)`);
+    }
+    console.log('');
+    await createInfographicPost({
+      root: ROOT,
+      postDir,
+      slug,
+      topic: topic || 'health tips',
+      slideCountOverride,
+      context: topic,
+    });
+    return;
+  }
   if (postType === POST_TYPE_APP_AD) {
     console.log(`Приложение: ${appName}${appId ? ` (${appId})` : ''}`);
     if (appProfile?.tagline) console.log(`   ${appProfile.tagline}`);

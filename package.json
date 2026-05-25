@@ -7,6 +7,7 @@
         "posts:fit": "node scripts/fit-images.js",
         "create-post": "node create-post.js",
         "list-apps": "node scripts/list-apps.js",
+        "generate-infographic": "node scripts/generate-infographic.js",
         "check-secrets": "node scripts/check-secrets.js"
     },
     "dependencies": {

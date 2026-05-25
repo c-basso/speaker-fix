@@ -3,6 +3,7 @@
 const {
   POST_TYPE_APP_AD,
   POST_TYPE_TOPIC,
+  POST_TYPE_INFOGRAPHIC,
 } = require('./post-types.js');
 const {
   loadAppsCatalog,
@@ -80,6 +81,21 @@ async function resolveCreatePostInput(parsed) {
       appId: undefined,
       topic: topic || '',
       slideCount,
+      fromCatalog: false,
+    };
+  }
+
+  if (postType === POST_TYPE_INFOGRAPHIC) {
+    if (!topic) {
+      throw new Error(
+        'Topic required for --type infographic (e.g. npm run create-post -- --type infographic "sperm health tips")',
+      );
+    }
+    return {
+      postType: POST_TYPE_INFOGRAPHIC,
+      topic,
+      slideCount,
+      appName: '',
       fromCatalog: false,
     };
   }
