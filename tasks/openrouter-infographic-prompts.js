@@ -2,6 +2,7 @@
 
 const { MIN_SLIDES, MAX_SLIDES } = require('./post-slides.js');
 const { INFOGRAPHIC_SLIDE_COUNT } = require('./post-types.js');
+const { getInfographicAspect } = require('./infographic-aspect.js');
 
 function buildInfographicJsonSchema(forcedSlideCount) {
   const countField = forcedSlideCount ?? 'integer';
@@ -28,9 +29,11 @@ function buildInfographicSystemPrompt(forcedSlideCount) {
     ? `Exactly ${forcedSlideCount} infographic slides. slideCount=${forcedSlideCount}.`
     : `Exactly ${defaultCount} slides (or ${defaultCount - 1} if the topic is very narrow). slideCount must match slides.length.`;
 
-  return `You write specs for a TikTok infographic carousel (1080×1920). Slides should look clean and readable — less visual noise than a busy poster, but still filled enough to teach one idea.
+  const { width, height, promptLabel } = getInfographicAspect();
 
-Each slide = one image: white background, bold imageTitle at top, TOP half (problem/bad) vs BOTTOM half (solution/good), red X and green check as anchors.
+  return `You write specs for a TikTok infographic carousel (${width}×${height}, ${promptLabel}). Slides should look clean and readable — less visual noise than a busy poster, but still filled enough to teach one idea.
+
+Each slide = one image on a ${promptLabel} canvas: white background, bold imageTitle at top, TOP band (problem/bad) vs BOTTOM band (solution/good), red X and green check as anchors. Layout must fit in a square-ish frame — compact vertical spacing so TikTok does not crop the headline or captions.
 
 Layout per slide:
 - TOP: 2–4 simple objects/icons on the left/right, large red X in the center, ONE short caption under the top half (4–8 words). Do not repeat the same caption elsewhere.

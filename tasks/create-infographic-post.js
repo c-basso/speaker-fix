@@ -10,6 +10,7 @@ const {
   generateImage,
   DEFAULT_IMAGE_MODEL,
 } = require('./openrouter-image-gen.js');
+const { getInfographicAspect } = require('./infographic-aspect.js');
 
 function padSlide(n) {
   return String(n).padStart(2, '0');
@@ -38,6 +39,9 @@ async function fitPostImages(root, slug) {
  */
 async function createInfographicPost(ctx) {
   const { root, postDir, slug, topic, slideCountOverride, context } = ctx;
+
+  const aspect = getInfographicAspect();
+  console.log(`   формат: ${aspect.ratio} (${aspect.width}×${aspect.height})`);
 
   console.log('1/3 OpenRouter — caption + infographic specs…');
   const content = await generateInfographicPostContent(topic, {
@@ -99,6 +103,9 @@ async function createInfographicPost(ctx) {
     files: slideFiles,
     imageGen: {
       model: DEFAULT_IMAGE_MODEL,
+      aspectRatio: aspect.ratio,
+      width: aspect.width,
+      height: aspect.height,
       slides: imageGenSlides,
     },
     createdAt: new Date().toISOString(),

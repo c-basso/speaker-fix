@@ -1,0 +1,110 @@
+{
+  "postType": "infographic",
+  "title": "How White Noise Improves Sleep & Focus",
+  "description": "Discover how a simple white noise machine can mask distractions, boost sleep quality, and sharpen focus. Learn the science, portable tips, and daily habit tricks to make it work for you. #WhiteNoise #SleepBetter #Focus #Wellness #Productivity",
+  "topic": "white noice mashine for better sleep and focus",
+  "slideCount": 6,
+  "slides": [
+    {
+      "file": "01.jpg",
+      "imageTitle": "WHITE NOISE BASICS",
+      "topic": "white noise machine",
+      "topSection": "Left shows a chaotic city noise icon, right shows a tossing‑and‑turning sleeper icon, a large red X sits in the center, and the caption reads ‘Masks disruptive sounds’",
+      "bottomSection": "Left shows a gentle wave icon, right shows a peaceful sleeper icon, a large green check sits in the center, and the caption reads ‘Creates soothing background’",
+      "index": 1
+    },
+    {
+      "file": "02.jpg",
+      "imageTitle": "SLEEP IMPROVEMENT",
+      "topic": "sleep quality",
+      "topSection": "Left shows an insomnia icon (eyes open), right shows a fragmented sleep icon, a large red X sits in the center, and the caption reads ‘Reduces nighttime awakenings’",
+      "bottomSection": "Left shows a deep sleep icon, right shows a refreshed person icon, a large green check sits in the center, and the caption reads ‘Promotes longer REM cycles’",
+      "index": 2
+    },
+    {
+      "file": "03.jpg",
+      "imageTitle": "FOCUS BOOST",
+      "topic": "concentration aid",
+      "topSection": "Left shows a distracted worker icon, right shows a noisy office icon, a large red X sits in the center, and the caption reads ‘Blocks distracting chatter’",
+      "bottomSection": "Left shows a focused worker icon, right shows a check‑list icon, a large green check sits in the center, and the caption reads ‘Enhances sustained attention’",
+      "index": 3
+    },
+    {
+      "file": "04.jpg",
+      "imageTitle": "STRESS REDUCTION",
+      "topic": "stress relief",
+      "topSection": "Left shows a stressed icon (tension lines), right shows an anxiety icon, a large red X sits in the center, and the caption reads ‘Lowers cortisol spikes’",
+      "bottomSection": "Left shows a relaxed icon, right shows a calm breath icon, a large green check sits in the center, and the caption reads ‘Activates relaxation response’",
+      "index": 4
+    },
+    {
+      "file": "05.jpg",
+      "imageTitle": "PORTABLE USE",
+      "topic": "on‑the‑go convenience",
+      "topSection": "Left shows a bulky machine icon, right shows a tangled cords icon, a large red X sits in the center, and the caption reads ‘Eliminates bulky setups’",
+      "bottomSection": "Left shows a compact device icon, right shows a travel bag icon, a large green check sits in the center, and the caption reads ‘Fits in pocket or desk’",
+      "index": 5
+    },
+    {
+      "file": "06.jpg",
+      "imageTitle": "SCIENCE BACKED",
+      "topic": "research evidence",
+      "topSection": "Left shows a question mark icon, right shows conflicting studies icon, a large red X sits in the center, and the caption reads ‘Clarifies mixed findings’",
+      "bottomSection": "Left shows a check‑mark icon, right shows a peer‑reviewed journal icon, a large green check sits in the center, and the caption reads ‘Supported by sleep labs’",
+      "index": 6
+    }
+  ],
+  "files": [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg"
+  ],
+  "imageGen": {
+    "model": "x-ai/grok-imagine-image-quality",
+    "aspectRatio": "1:1",
+    "width": 1080,
+    "height": 1080,
+    "slides": [
+      {
+        "file": "01.jpg",
+        "imageTitle": "WHITE NOISE BASICS",
+        "topic": "white noise machine",
+        "promptFile": "_prompts/01.txt"
+      },
+      {
+        "file": "02.jpg",
+        "imageTitle": "SLEEP IMPROVEMENT",
+        "topic": "sleep quality",
+        "promptFile": "_prompts/02.txt"
+      },
+      {
+        "file": "03.jpg",
+        "imageTitle": "FOCUS BOOST",
+        "topic": "concentration aid",
+        "promptFile": "_prompts/03.txt"
+      },
+      {
+        "file": "04.jpg",
+        "imageTitle": "STRESS REDUCTION",
+        "topic": "stress relief",
+        "promptFile": "_prompts/04.txt"
+      },
+      {
+        "file": "05.jpg",
+        "imageTitle": "PORTABLE USE",
+        "topic": "on‑the‑go convenience",
+        "promptFile": "_prompts/05.txt"
+      },
+      {
+        "file": "06.jpg",
+        "imageTitle": "SCIENCE BACKED",
+        "topic": "research evidence",
+        "promptFile": "_prompts/06.txt"
+      }
+    ]
+  },
+  "createdAt": "2026-05-25T11:54:39.282Z"
+}

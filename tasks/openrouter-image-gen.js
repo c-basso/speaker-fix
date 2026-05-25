@@ -19,6 +19,7 @@ const {
   getImageGenApiKey,
 } = require('./openrouter-image-client.js');
 const { formatSdkError } = require('./openrouter-client.js');
+const { getInfographicAspect } = require('./infographic-aspect.js');
 
 const DEFAULT_IMAGE_MODEL =
   process.env.OPENROUTER_IMAGE_MODEL || 'x-ai/grok-imagine-image-quality';
@@ -46,23 +47,33 @@ function extractImageUrlsFromResponse(data) {
   return urls;
 }
 
-async function saveImageUrlToFile(imageUrl, outPath) {
+async function saveImageUrlToFile(imageUrl, outPath, outputSize = null) {
   await fs.mkdir(path.dirname(outPath), { recursive: true });
 
+  let buf;
   if (/^data:image\//i.test(imageUrl)) {
     const m = /^data:image\/(\w+);base64,(.+)$/i.exec(imageUrl);
     if (!m) throw new Error('Invalid image data URL from OpenRouter');
-    const buf = Buffer.from(m[2], 'base64');
-    await sharp(buf).jpeg({ quality: 92 }).toFile(outPath);
-    return outPath;
+    buf = Buffer.from(m[2], 'base64');
+  } else {
+    const res = await httpFetch(imageUrl);
+    if (!res.ok) {
+      throw new Error(
+        `Failed to download image (${res.status}): ${imageUrl.slice(0, 80)}`,
+      );
+    }
+    buf = Buffer.from(await res.arrayBuffer());
   }
 
-  const res = await httpFetch(imageUrl);
-  if (!res.ok) {
-    throw new Error(`Failed to download image (${res.status}): ${imageUrl.slice(0, 80)}`);
+  let pipeline = sharp(buf).rotate();
+  if (outputSize?.width && outputSize?.height) {
+    pipeline = pipeline.resize(outputSize.width, outputSize.height, {
+      fit: 'contain',
+      background: { r: 255, g: 255, b: 255, alpha: 1 },
+    });
   }
-  const buf = Buffer.from(await res.arrayBuffer());
-  await sharp(buf).jpeg({ quality: 92 }).toFile(outPath);
+
+  await pipeline.jpeg({ quality: 92, mozjpeg: true }).toFile(outPath);
   return outPath;
 }
 
@@ -75,15 +86,20 @@ async function generateImage(prompt, options = {}) {
   const apiKey = getImageGenApiKey();
   const log = options.log !== false;
 
+  const aspect = options.aspect || getInfographicAspect();
+
   const body = {
     model,
     messages: [{ role: 'user', content: String(prompt).trim() }],
     modalities: ['image'],
     stream: false,
+    image_config: {
+      aspect_ratio: aspect.ratio,
+    },
   };
 
   if (log) {
-    console.log(`[openrouter-image] model=${model}`);
+    console.log(`[openrouter-image] model=${model} aspect=${aspect.ratio} (${aspect.width}×${aspect.height})`);
     console.log(`[openrouter-image] prompt (${prompt.length} chars):\n${prompt.slice(0, 500)}${prompt.length > 500 ? '…' : ''}`);
   }
 
@@ -140,8 +156,17 @@ async function generateImage(prompt, options = {}) {
     return { imageUrl, model, usage: data?.usage };
   }
 
-  const saved = await saveImageUrlToFile(imageUrl, options.outPath);
-  return { imageUrl, outPath: saved, model, usage: data?.usage };
+  const saved = await saveImageUrlToFile(imageUrl, options.outPath, {
+    width: aspect.width,
+    height: aspect.height,
+  });
+  return {
+    imageUrl,
+    outPath: saved,
+    model,
+    usage: data?.usage,
+    aspect: aspect.ratio,
+  };
 }
 
 module.exports = {

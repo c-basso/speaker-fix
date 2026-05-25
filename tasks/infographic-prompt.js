@@ -1,9 +1,17 @@
 'use strict';
 
-/** Общий стиль для всех инфографических слайдов (TikTok 9:16). */
-const INFOGRAPHIC_STYLE_BLOCK = `Clean balanced infographic, TikTok educational style, flat vector illustration, white background, high contrast, 9:16 vertical.
-Clear layout with breathing room — not empty, not crowded. A few large icons per half (avoid cluttering with many small objects).
-Readable short captions only (one line per half, normal size — not fine print). No paragraph text, no duplicate labels, no extra callouts.`;
+const { getInfographicAspect } = require('./infographic-aspect.js');
+
+function infographicStyleBlock() {
+  const { width, height, promptLabel } = getInfographicAspect();
+  return `Clean balanced infographic, TikTok photo carousel, ${promptLabel}, ${width}×${height}px canvas.
+Keep the full top and bottom sections visible inside the frame (compact layout, safe margins — nothing cut off at edges).
+Flat vector illustration, white background, high contrast. A few large icons per half.
+Readable short captions only (one line per half). No paragraph text, no duplicate labels.`;
+}
+
+/** @deprecated use infographicStyleBlock() — kept for tests */
+const INFOGRAPHIC_STYLE_BLOCK = infographicStyleBlock();
 
 const DEFAULT_PROMPT_TEMPLATE = `Educational infographic about {{TOPIC}}, white background, bold black title "{{TITLE}}" at the top.
 
@@ -13,7 +21,7 @@ Top section:
 Bottom section:
 {{BOTTOM_SECTION}}
 
-${INFOGRAPHIC_STYLE_BLOCK}`;
+${infographicStyleBlock()}`;
 
 function fillTemplate(template, vars) {
   let out = String(template || DEFAULT_PROMPT_TEMPLATE);
@@ -46,6 +54,7 @@ function buildInfographicPrompt(spec) {
 
 module.exports = {
   INFOGRAPHIC_STYLE_BLOCK,
+  infographicStyleBlock,
   DEFAULT_PROMPT_TEMPLATE,
   buildInfographicPrompt,
   fillTemplate,
