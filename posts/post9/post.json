@@ -1,0 +1,110 @@
+{
+  "postType": "infographic",
+  "title": "Smart Investment: Build Wealth Wisely",
+  "description": "Learn the fundamentals of smart investing with our 6-step guide. Avoid common pitfalls and make informed decisions. #Investing #FinanceWealth #MoneyManagement #SmartInvesting",
+  "topic": "smart investment",
+  "slideCount": 6,
+  "slides": [
+    {
+      "file": "01.jpg",
+      "imageTitle": "SMART INVESTING BASICS",
+      "topic": "investment fundamentals",
+      "topSection": "Top: confused person with money scattered around, red X in center, caption: 'Random spending'",
+      "bottomSection": "Bottom: organized budget plan, green check in center, caption: 'Strategic planning'",
+      "index": 1
+    },
+    {
+      "file": "02.jpg",
+      "imageTitle": "COMMON MISTAKES",
+      "topic": "investment errors",
+      "topSection": "Top: all eggs in one basket icon, red X in center, caption: 'Putting all in one stock'",
+      "bottomSection": "Bottom: multiple investment types, green check in center, caption: 'Diversified portfolio'",
+      "index": 2
+    },
+    {
+      "file": "03.jpg",
+      "imageTitle": "RISK MANAGEMENT",
+      "topic": "investment risk",
+      "topSection": "Top: rollercoaster graphic, red X in center, caption: 'High risk without strategy'",
+      "bottomSection": "Bottom: balanced scales, green check in center, caption: 'Calculated risk approach'",
+      "index": 3
+    },
+    {
+      "file": "04.jpg",
+      "imageTitle": "TIME HORIZON",
+      "topic": "investment timeline",
+      "topSection": "Top: clock with fast hands, red X in center, caption: 'Get rich quick mentality'",
+      "bottomSection": "Bottom: growing tree, green check in center, caption: 'Long-term growth mindset'",
+      "index": 4
+    },
+    {
+      "file": "05.jpg",
+      "imageTitle": "EMOTIONAL INVESTING",
+      "topic": "psychology of investing",
+      "topSection": "Top: stress chart, red X in center, caption: 'Following market emotions'",
+      "bottomSection": "Bottom: steady graph, green check in center, caption: 'Sticking to your plan'",
+      "index": 5
+    },
+    {
+      "file": "06.jpg",
+      "imageTitle": "KEY PRINCIPLES",
+      "topic": "investment success",
+      "topSection": "Top: question marks, red X in center, caption: 'Uninformed decisions'",
+      "bottomSection": "Bottom: knowledge book, green check in center, caption: 'Research and education'",
+      "index": 6
+    }
+  ],
+  "files": [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg"
+  ],
+  "imageGen": {
+    "model": "x-ai/grok-imagine-image-quality",
+    "aspectRatio": "1:1",
+    "width": 1080,
+    "height": 1080,
+    "slides": [
+      {
+        "file": "01.jpg",
+        "imageTitle": "SMART INVESTING BASICS",
+        "topic": "investment fundamentals",
+        "promptFile": "_prompts/01.txt"
+      },
+      {
+        "file": "02.jpg",
+        "imageTitle": "COMMON MISTAKES",
+        "topic": "investment errors",
+        "promptFile": "_prompts/02.txt"
+      },
+      {
+        "file": "03.jpg",
+        "imageTitle": "RISK MANAGEMENT",
+        "topic": "investment risk",
+        "promptFile": "_prompts/03.txt"
+      },
+      {
+        "file": "04.jpg",
+        "imageTitle": "TIME HORIZON",
+        "topic": "investment timeline",
+        "promptFile": "_prompts/04.txt"
+      },
+      {
+        "file": "05.jpg",
+        "imageTitle": "EMOTIONAL INVESTING",
+        "topic": "psychology of investing",
+        "promptFile": "_prompts/05.txt"
+      },
+      {
+        "file": "06.jpg",
+        "imageTitle": "KEY PRINCIPLES",
+        "topic": "investment success",
+        "promptFile": "_prompts/06.txt"
+      }
+    ]
+  },
+  "createdAt": "2026-05-27T16:27:48.496Z"
+}
