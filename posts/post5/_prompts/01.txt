@@ -1,0 +1,12 @@
+Educational infographic about white noise basics, white background, bold black title "WHITE NOISE EXPLAINED" at the top.
+
+Top section:
+Top half: chaotic sounds (car horns, barking dogs, alarms), red X in center, caption: 'DISRUPTIVE SOUND CLUTTER'
+
+Bottom section:
+Bottom half: smooth sound waves, green check in center, caption: 'CONSISTENT AUDIBLE MASKING'
+
+Clean balanced infographic, TikTok photo carousel, square 1:1 aspect ratio, 1080×1080px canvas.
+Keep the full top and bottom sections visible inside the frame (compact layout, safe margins — nothing cut off at edges).
+Flat vector illustration, white background, high contrast. A few large icons per half.
+Readable short captions only (one line per half). No paragraph text, no duplicate labels.
