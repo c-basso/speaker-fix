@@ -1,0 +1,110 @@
+{
+  "postType": "infographic",
+  "title": "Turn Your Skills Into Cash: Side‑Hustles & Passive Income",
+  "description": "Learn simple side‑hustle ideas and passive‑income hacks you can start today. #SideHustle #PassiveIncome #MoneyTips #FinancialFreedom",
+  "topic": "sidehustle and passiveincome",
+  "slideCount": 6,
+  "slides": [
+    {
+      "file": "01.jpg",
+      "imageTitle": "START WITH A SKILL",
+      "topic": "Identify marketable talent",
+      "topSection": "Left: laptop icon, Right: paintbrush icon, Center: large red X, Caption: \"No demand, no profit\"",
+      "bottomSection": "Left: smartphone icon, Right: dollar sign icon, Center: large green check, Caption: \"Find a need, charge for it\"",
+      "index": 1
+    },
+    {
+      "file": "02.jpg",
+      "imageTitle": "SELL DIGITAL PRODUCTS",
+      "topic": "Create and monetize assets",
+      "topSection": "Left: ebook icon, Right: music note icon, Center: large red X, Caption: \"One‑time sales only\"",
+      "bottomSection": "Left: subscription icon, Right: recurring cash icon, Center: large green check, Caption: \"Earn repeat revenue\"",
+      "index": 2
+    },
+    {
+      "file": "03.jpg",
+      "imageTitle": "RENT OUT YOUR SPACE",
+      "topic": "Leverage unused rooms",
+      "topSection": "Left: empty bedroom icon, Right: “For Sale” sign, Center: large red X, Caption: \"Leave it idle\"",
+      "bottomSection": "Left: Airbnb logo icon, Right: calendar icon, Center: large green check, Caption: \"Turn idle rooms into income\"",
+      "index": 3
+    },
+    {
+      "file": "04.jpg",
+      "imageTitle": "AUTOMATE AFFILIATE SALES",
+      "topic": "Earn commissions on autopilot",
+      "topSection": "Left: link icon, Right: manual checkout icon, Center: large red X, Caption: \"Hand‑sell each order\"",
+      "bottomSection": "Left: funnel icon, Right: payout icon, Center: large green check, Caption: \"Set up links, get paid\"",
+      "index": 4
+    },
+    {
+      "file": "05.jpg",
+      "imageTitle": "INVEST IN DIVIDENDS",
+      "topic": "Stocks that pay you",
+      "topSection": "Left: stock chart down, Right: empty wallet, Center: large red X, Caption: \"Buy low, sell high only\"",
+      "bottomSection": "Left: dividend arrow up, Right: growing wallet, Center: large green check, Caption: \"Collect quarterly payouts\"",
+      "index": 5
+    },
+    {
+      "file": "06.jpg",
+      "imageTitle": "CREATE A YOUTUBE CHANNEL",
+      "topic": "Monetize video content",
+      "topSection": "Left: camera icon, Right: no ads icon, Center: large red X, Caption: \"No audience, no earnings\"",
+      "bottomSection": "Left: play button, Right: ad revenue icon, Center: large green check, Caption: \"Build views, earn ads\"",
+      "index": 6
+    }
+  ],
+  "files": [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg"
+  ],
+  "imageGen": {
+    "model": "x-ai/grok-imagine-image-quality",
+    "aspectRatio": "1:1",
+    "width": 1080,
+    "height": 1080,
+    "slides": [
+      {
+        "file": "01.jpg",
+        "imageTitle": "START WITH A SKILL",
+        "topic": "Identify marketable talent",
+        "promptFile": "_prompts/01.txt"
+      },
+      {
+        "file": "02.jpg",
+        "imageTitle": "SELL DIGITAL PRODUCTS",
+        "topic": "Create and monetize assets",
+        "promptFile": "_prompts/02.txt"
+      },
+      {
+        "file": "03.jpg",
+        "imageTitle": "RENT OUT YOUR SPACE",
+        "topic": "Leverage unused rooms",
+        "promptFile": "_prompts/03.txt"
+      },
+      {
+        "file": "04.jpg",
+        "imageTitle": "AUTOMATE AFFILIATE SALES",
+        "topic": "Earn commissions on autopilot",
+        "promptFile": "_prompts/04.txt"
+      },
+      {
+        "file": "05.jpg",
+        "imageTitle": "INVEST IN DIVIDENDS",
+        "topic": "Stocks that pay you",
+        "promptFile": "_prompts/05.txt"
+      },
+      {
+        "file": "06.jpg",
+        "imageTitle": "CREATE A YOUTUBE CHANNEL",
+        "topic": "Monetize video content",
+        "promptFile": "_prompts/06.txt"
+      }
+    ]
+  },
+  "createdAt": "2026-05-27T20:39:38.537Z"
+}

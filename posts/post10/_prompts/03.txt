@@ -1,0 +1,12 @@
+Educational infographic about Leverage unused rooms, white background, bold black title "RENT OUT YOUR SPACE" at the top.
+
+Top section:
+Left: empty bedroom icon, Right: “For Sale” sign, Center: large red X, Caption: "Leave it idle"
+
+Bottom section:
+Left: Airbnb logo icon, Right: calendar icon, Center: large green check, Caption: "Turn idle rooms into income"
+
+Clean balanced infographic, TikTok photo carousel, square 1:1 aspect ratio, 1080×1080px canvas.
+Keep the full top and bottom sections visible inside the frame (compact layout, safe margins — nothing cut off at edges).
+Flat vector illustration, white background, high contrast. A few large icons per half.
+Readable short captions only (one line per half). No paragraph text, no duplicate labels.
