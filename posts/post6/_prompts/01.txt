@@ -1,0 +1,12 @@
+Educational infographic about noise disrupting sleep, white background, bold black title "SLEEP STRUGGLES" at the top.
+
+Top section:
+Left: loud traffic icon, center: large red X, right: barking dog icon. Caption: 'Loud noises ruin sleep'
+
+Bottom section:
+Left: quiet room icon, center: large green check, right: sleeping peacefully icon. Caption: 'Peaceful nights matter'
+
+Clean balanced infographic, TikTok photo carousel, square 1:1 aspect ratio, 1080×1080px canvas.
+Keep the full top and bottom sections visible inside the frame (compact layout, safe margins — nothing cut off at edges).
+Flat vector illustration, white background, high contrast. A few large icons per half.
+Readable short captions only (one line per half). No paragraph text, no duplicate labels.

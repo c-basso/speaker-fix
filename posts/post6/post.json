@@ -1,0 +1,110 @@
+{
+  "postType": "infographic",
+  "title": "Sleep Better with Noise Machines",
+  "description": "Discover how noise machines can transform your sleep quality. Say goodbye to sleepless nights! #sleepbetter #noisemachine #sleephacks #wellness",
+  "topic": "noise machine for sleeping",
+  "slideCount": 6,
+  "slides": [
+    {
+      "file": "01.jpg",
+      "imageTitle": "SLEEP STRUGGLES",
+      "topic": "noise disrupting sleep",
+      "topSection": "Left: loud traffic icon, center: large red X, right: barking dog icon. Caption: 'Loud noises ruin sleep'",
+      "bottomSection": "Left: quiet room icon, center: large green check, right: sleeping peacefully icon. Caption: 'Peaceful nights matter'",
+      "index": 1
+    },
+    {
+      "file": "02.jpg",
+      "imageTitle": "NOISE IMPACT",
+      "topic": "effects of noise on sleep",
+      "topSection": "Left: tossing and turning icon, center: large red X, right: broken sleep cycle icon. Caption: 'Noise fragments sleep'",
+      "bottomSection": "Left: deep sleep icon, center: large green check, right: restored energy icon. Caption: 'Quality sleep restores'",
+      "index": 2
+    },
+    {
+      "file": "03.jpg",
+      "imageTitle": "FAILED SOLUTIONS",
+      "topic": "common ineffective methods",
+      "topSection": "Left: uncomfortable earplugs icon, center: large red X, right: pillow over head icon. Caption: 'Temporary fixes fail'",
+      "bottomSection": "Left: consistent sound wave icon, center: large green check, right: noise machine icon. Caption: 'Consistent blocks noise'",
+      "index": 3
+    },
+    {
+      "file": "04.jpg",
+      "imageTitle": "WHITE NOISE",
+      "topic": "introducing noise machines",
+      "topSection": "Left: noisy street icon, center: large red X, right: disruptive soundwaves icon. Caption: 'Environment too loud'",
+      "bottomSection": "Left: noise machine icon, center: large green check, right: peaceful sleep icon. Caption: 'Mask disruptive sounds'",
+      "index": 4
+    },
+    {
+      "file": "05.jpg",
+      "imageTitle": "SLEEP BENEFITS",
+      "topic": "advantages of noise machines",
+      "topSection": "Left: stress icon, center: large red X, right: elevated cortisol icon. Caption: 'Noise increases stress'",
+      "bottomSection": "Left: calm sleep icon, center: large green check, right: balanced hormones icon. Caption: 'Machines promote calm'",
+      "index": 5
+    },
+    {
+      "file": "06.jpg",
+      "imageTitle": "CHOOSING RIGHT",
+      "topic": "selecting noise machines",
+      "topSection": "Left: volume too high icon, center: large red X, right: volume too low icon. Caption: 'Volume too high or low'",
+      "bottomSection": "Left: comfortable volume icon, center: large green check, right: personalized sound icon. Caption: 'Find your perfect sound'",
+      "index": 6
+    }
+  ],
+  "files": [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg"
+  ],
+  "imageGen": {
+    "model": "x-ai/grok-imagine-image-quality",
+    "aspectRatio": "1:1",
+    "width": 1080,
+    "height": 1080,
+    "slides": [
+      {
+        "file": "01.jpg",
+        "imageTitle": "SLEEP STRUGGLES",
+        "topic": "noise disrupting sleep",
+        "promptFile": "_prompts/01.txt"
+      },
+      {
+        "file": "02.jpg",
+        "imageTitle": "NOISE IMPACT",
+        "topic": "effects of noise on sleep",
+        "promptFile": "_prompts/02.txt"
+      },
+      {
+        "file": "03.jpg",
+        "imageTitle": "FAILED SOLUTIONS",
+        "topic": "common ineffective methods",
+        "promptFile": "_prompts/03.txt"
+      },
+      {
+        "file": "04.jpg",
+        "imageTitle": "WHITE NOISE",
+        "topic": "introducing noise machines",
+        "promptFile": "_prompts/04.txt"
+      },
+      {
+        "file": "05.jpg",
+        "imageTitle": "SLEEP BENEFITS",
+        "topic": "advantages of noise machines",
+        "promptFile": "_prompts/05.txt"
+      },
+      {
+        "file": "06.jpg",
+        "imageTitle": "CHOOSING RIGHT",
+        "topic": "selecting noise machines",
+        "promptFile": "_prompts/06.txt"
+      }
+    ]
+  },
+  "createdAt": "2026-05-27T11:16:19.205Z"
+}

@@ -1,0 +1,12 @@
+Educational infographic about effects of noise on sleep, white background, bold black title "NOISE IMPACT" at the top.
+
+Top section:
+Left: tossing and turning icon, center: large red X, right: broken sleep cycle icon. Caption: 'Noise fragments sleep'
+
+Bottom section:
+Left: deep sleep icon, center: large green check, right: restored energy icon. Caption: 'Quality sleep restores'
+
+Clean balanced infographic, TikTok photo carousel, square 1:1 aspect ratio, 1080×1080px canvas.
+Keep the full top and bottom sections visible inside the frame (compact layout, safe margins — nothing cut off at edges).
+Flat vector illustration, white background, high contrast. A few large icons per half.
+Readable short captions only (one line per half). No paragraph text, no duplicate labels.
