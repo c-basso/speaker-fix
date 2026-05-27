@@ -1,0 +1,110 @@
+{
+  "postType": "infographic",
+  "title": "How to Hit 10M Views in 7 Days 🚀",
+  "description": "Stop posting random videos and start using this viral blueprint. 📈 From hooks to retention, here is your 7-day roadmap to explosive growth. #tiktokgrowth #contentstrategy #viraltips #socialmediamarketing",
+  "topic": "How to get 10M views on TikTok in 7 days.",
+  "slideCount": 6,
+  "slides": [
+    {
+      "file": "01.jpg",
+      "imageTitle": "THE VIRAL BLUEPRINT",
+      "topic": "TikTok growth strategy",
+      "topSection": "Left: random clips, Right: blurry text, Red X in center, Caption: Posting without a clear plan",
+      "bottomSection": "Left: niche focus, Right: high quality, Green check in center, Caption: Following a strategic roadmap",
+      "index": 1
+    },
+    {
+      "file": "02.jpg",
+      "imageTitle": "MASTER THE HOOK",
+      "topic": "Video opening techniques",
+      "topSection": "Left: slow intro, Right: silent start, Red X in center, Caption: Losing viewers in first seconds",
+      "bottomSection": "Left: bold text, Right: fast movement, Green check in center, Caption: Grabbing attention immediately",
+      "index": 2
+    },
+    {
+      "file": "03.jpg",
+      "imageTitle": "RETENTION IS KING",
+      "topic": "Watch time optimization",
+      "topSection": "Left: long pauses, Right: boring loops, Red X in center, Caption: Letting the energy drop",
+      "bottomSection": "Left: quick cuts, Right: subtitles, Green check in center, Caption: Keeping viewers watching longer",
+      "index": 3
+    },
+    {
+      "file": "04.jpg",
+      "imageTitle": "OPTIMIZE FOR SEO",
+      "topic": "TikTok search visibility",
+      "topSection": "Left: vague captions, Right: no hashtags, Red X in center, Caption: Making content hard to find",
+      "bottomSection": "Left: keywords, Right: niche tags, Green check in center, Caption: Using searchable descriptive terms",
+      "index": 4
+    },
+    {
+      "file": "05.jpg",
+      "imageTitle": "ENGAGEMENT TRIGGERS",
+      "topic": "Driving comments and shares",
+      "topSection": "Left: passive video, Right: closed end, Red X in center, Caption: Forgetting to ask questions",
+      "bottomSection": "Left: strong CTA, Right: debate topics, Green check in center, Caption: Prompting active viewer interaction",
+      "index": 5
+    },
+    {
+      "file": "06.jpg",
+      "imageTitle": "THE 7-DAY CHECKLIST",
+      "topic": "Daily execution summary",
+      "topSection": "Left: inconsistent posts, Right: low effort, Red X in center, Caption: Guessing what works daily",
+      "bottomSection": "Left: high frequency, Right: data analysis, Green check in center, Caption: Testing and scaling winners",
+      "index": 6
+    }
+  ],
+  "files": [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg"
+  ],
+  "imageGen": {
+    "model": "x-ai/grok-imagine-image-quality",
+    "aspectRatio": "1:1",
+    "width": 1080,
+    "height": 1080,
+    "slides": [
+      {
+        "file": "01.jpg",
+        "imageTitle": "THE VIRAL BLUEPRINT",
+        "topic": "TikTok growth strategy",
+        "promptFile": "_prompts/01.txt"
+      },
+      {
+        "file": "02.jpg",
+        "imageTitle": "MASTER THE HOOK",
+        "topic": "Video opening techniques",
+        "promptFile": "_prompts/02.txt"
+      },
+      {
+        "file": "03.jpg",
+        "imageTitle": "RETENTION IS KING",
+        "topic": "Watch time optimization",
+        "promptFile": "_prompts/03.txt"
+      },
+      {
+        "file": "04.jpg",
+        "imageTitle": "OPTIMIZE FOR SEO",
+        "topic": "TikTok search visibility",
+        "promptFile": "_prompts/04.txt"
+      },
+      {
+        "file": "05.jpg",
+        "imageTitle": "ENGAGEMENT TRIGGERS",
+        "topic": "Driving comments and shares",
+        "promptFile": "_prompts/05.txt"
+      },
+      {
+        "file": "06.jpg",
+        "imageTitle": "THE 7-DAY CHECKLIST",
+        "topic": "Daily execution summary",
+        "promptFile": "_prompts/06.txt"
+      }
+    ]
+  },
+  "createdAt": "2026-05-27T11:55:06.084Z"
+}
