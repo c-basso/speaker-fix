@@ -1,0 +1,110 @@
+{
+  "postType": "infographic",
+  "title": "ESSENTIAL CONCEPTS",
+  "description": "Guides understanding of core principles for smart investing. #Investing #FinanceWealth #MoneyManagement #SmartInvesting",
+  "topic": "fundamentals of smart investing",
+  "slideCount": 6,
+  "slides": [
+    {
+      "file": "01.jpg",
+      "imageTitle": "CORE CONCEPTS",
+      "topic": "Smart Investing Basics",
+      "topSection": "Introduces foundational knowledge",
+      "bottomSection": "Highlights key principles",
+      "index": 1
+    },
+    {
+      "file": "02.jpg",
+      "imageTitle": "RISK MANAGEMENT",
+      "topic": "Manage Risk Effectively",
+      "topSection": "Emphasizes caution",
+      "bottomSection": "Stresses balance",
+      "index": 2
+    },
+    {
+      "file": "03.jpg",
+      "imageTitle": "DIVERSIFICATION",
+      "topic": "Diversify Strategies",
+      "topSection": "Requires spread",
+      "bottomSection": "Reduces vulnerability",
+      "index": 3
+    },
+    {
+      "file": "04.jpg",
+      "imageTitle": "COMPOUND INTEREST",
+      "topic": "Long-Term Growth",
+      "topSection": "Accumulation focus",
+      "bottomSection": "Accelerates wealth",
+      "index": 4
+    },
+    {
+      "file": "05.jpg",
+      "imageTitle": "EDUCATION",
+      "topic": "Learn Continuously",
+      "topSection": "Demands knowledge",
+      "bottomSection": "Enhances skills",
+      "index": 5
+    },
+    {
+      "file": "06.jpg",
+      "imageTitle": "PRACTICAL APPLICATION",
+      "topic": "Apply Knowledge",
+      "topSection": "Implementation needed",
+      "bottomSection": "Real-world use",
+      "index": 6
+    }
+  ],
+  "files": [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg"
+  ],
+  "imageGen": {
+    "model": "x-ai/grok-imagine-image-quality",
+    "aspectRatio": "1:1",
+    "width": 1080,
+    "height": 1080,
+    "slides": [
+      {
+        "file": "01.jpg",
+        "imageTitle": "CORE CONCEPTS",
+        "topic": "Smart Investing Basics",
+        "promptFile": "_prompts/01.txt"
+      },
+      {
+        "file": "02.jpg",
+        "imageTitle": "RISK MANAGEMENT",
+        "topic": "Manage Risk Effectively",
+        "promptFile": "_prompts/02.txt"
+      },
+      {
+        "file": "03.jpg",
+        "imageTitle": "DIVERSIFICATION",
+        "topic": "Diversify Strategies",
+        "promptFile": "_prompts/03.txt"
+      },
+      {
+        "file": "04.jpg",
+        "imageTitle": "COMPOUND INTEREST",
+        "topic": "Long-Term Growth",
+        "promptFile": "_prompts/04.txt"
+      },
+      {
+        "file": "05.jpg",
+        "imageTitle": "EDUCATION",
+        "topic": "Learn Continuously",
+        "promptFile": "_prompts/05.txt"
+      },
+      {
+        "file": "06.jpg",
+        "imageTitle": "PRACTICAL APPLICATION",
+        "topic": "Apply Knowledge",
+        "promptFile": "_prompts/06.txt"
+      }
+    ]
+  },
+  "createdAt": "2026-05-28T18:24:33.004Z"
+}
