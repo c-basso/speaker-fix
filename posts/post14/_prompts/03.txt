@@ -1,10 +1,10 @@
-Educational infographic about Stocks that pay you, white background, bold black title "INVEST IN DIVIDENDS" at the top.
+Educational infographic about sound frequency science, white background, bold black title "FREQUENCY EXPLAINED" at the top.
 
 Top section:
-Left: stock chart down, Right: empty wallet, Center: large red X, Caption: "Buy low, sell high only"
+2-4 icons showing irregular sound patterns, red X in center, caption 'Random frequencies'
 
 Bottom section:
-Left: dividend arrow up, Right: growing wallet, Center: large green check, Caption: "Collect quarterly payouts"
+2-4 icons showing equal sound distribution, green check in center, caption 'Equal power across all frequencies'
 
 Clean balanced infographic, TikTok photo carousel, square 1:1 aspect ratio, 1080×1080px canvas.
 Keep the full top and bottom sections visible inside the frame (compact layout, safe margins — nothing cut off at edges).

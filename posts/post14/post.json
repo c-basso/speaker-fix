@@ -1,0 +1,110 @@
+{
+  "postType": "infographic",
+  "title": "Discover How White Noise Works",
+  "description": "Learn the science and benefits of white noise for better sleep and focus #white_noise #sleep_tips #focus_hacks #sound_science",
+  "topic": "Discover how white noise works",
+  "slideCount": 6,
+  "slides": [
+    {
+      "file": "01.jpg",
+      "imageTitle": "WHAT IS WHITE NOISE",
+      "topic": "white noise basics",
+      "topSection": "2-4 icons showing confusion/distraction, red X in center, caption 'Struggling with focus?'",
+      "bottomSection": "2-4 icons showing calm/focus, green check in center, caption 'Sound solution found'",
+      "index": 1
+    },
+    {
+      "file": "02.jpg",
+      "imageTitle": "MASKING UNWANTED SOUNDS",
+      "topic": "sound masking benefits",
+      "topSection": "2-4 icons showing disruptive sounds, red X in center, caption 'Distractions everywhere'",
+      "bottomSection": "2-4 icons showing white noise covering other sounds, green check in center, caption 'Sounds masked effectively'",
+      "index": 2
+    },
+    {
+      "file": "03.jpg",
+      "imageTitle": "FREQUENCY EXPLAINED",
+      "topic": "sound frequency science",
+      "topSection": "2-4 icons showing irregular sound patterns, red X in center, caption 'Random frequencies'",
+      "bottomSection": "2-4 icons showing equal sound distribution, green check in center, caption 'Equal power across all frequencies'",
+      "index": 3
+    },
+    {
+      "file": "04.jpg",
+      "imageTitle": "BETTER SLEEP QUALITY",
+      "topic": "sleep benefits",
+      "topSection": "2-4 icons showing restless sleep, red X in center, caption 'Sleep disturbances'",
+      "bottomSection": "2-4 icons showing peaceful sleep, green check in center, caption 'Deep, uninterrupted sleep'",
+      "index": 4
+    },
+    {
+      "file": "05.jpg",
+      "imageTitle": "ENHANCED CONCENTRATION",
+      "topic": "focus benefits",
+      "topSection": "2-4 icons showing scattered attention, red X in center, caption 'Hard to focus'",
+      "bottomSection": "2-4 icons showing laser focus, green check in center, caption 'Improved attention span'",
+      "index": 5
+    },
+    {
+      "file": "06.jpg",
+      "imageTitle": "USING WHITE NOISE",
+      "topic": "practical application",
+      "topSection": "2-4 icons showing incorrect volume levels, red X in center, caption 'Too loud or too quiet'",
+      "bottomSection": "2-4 icons showing proper volume settings, green check in center, caption 'Optimal volume for benefit'",
+      "index": 6
+    }
+  ],
+  "files": [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg"
+  ],
+  "imageGen": {
+    "model": "x-ai/grok-imagine-image-quality",
+    "aspectRatio": "1:1",
+    "width": 1080,
+    "height": 1080,
+    "slides": [
+      {
+        "file": "01.jpg",
+        "imageTitle": "WHAT IS WHITE NOISE",
+        "topic": "white noise basics",
+        "promptFile": "_prompts/01.txt"
+      },
+      {
+        "file": "02.jpg",
+        "imageTitle": "MASKING UNWANTED SOUNDS",
+        "topic": "sound masking benefits",
+        "promptFile": "_prompts/02.txt"
+      },
+      {
+        "file": "03.jpg",
+        "imageTitle": "FREQUENCY EXPLAINED",
+        "topic": "sound frequency science",
+        "promptFile": "_prompts/03.txt"
+      },
+      {
+        "file": "04.jpg",
+        "imageTitle": "BETTER SLEEP QUALITY",
+        "topic": "sleep benefits",
+        "promptFile": "_prompts/04.txt"
+      },
+      {
+        "file": "05.jpg",
+        "imageTitle": "ENHANCED CONCENTRATION",
+        "topic": "focus benefits",
+        "promptFile": "_prompts/05.txt"
+      },
+      {
+        "file": "06.jpg",
+        "imageTitle": "USING WHITE NOISE",
+        "topic": "practical application",
+        "promptFile": "_prompts/06.txt"
+      }
+    ]
+  },
+  "createdAt": "2026-05-28T11:27:43.496Z"
+}
