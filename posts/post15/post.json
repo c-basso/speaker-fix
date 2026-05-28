@@ -1,0 +1,111 @@
+{
+  "postType": "app-ad",
+  "title": "Stop losing the perfect shot! 📸",
+  "description": "Tired of blurry screenshots? Grab exact high-res frames from any video instantly. No uploads, just precision. 🚀 Download now! https://ExtractFrameApp.com/ #iphonehacks #contentcreator #videoediting #photographytips",
+  "topic": "App: Video To Photo - Grab Frame\nTagline: Extract exact photo frames from video on iPhone\nAudience: iPhone users, creators, and educators who need precise still images from video without desktop tools\nProblem: You need the exact frame from a clip, but browser tools require uploads and usually lack precise frame-level control\nFeatures: Exact frame selection with video scrubbing; Single or batch frame extraction; Export as JPG, PNG, or HEIC; Share Sheet workflow from Photos; On-device processing without video upload; ZIP/PDF export and saved projects\nPlatforms: iOS\nWebsite (optional in CTA/caption): https://ExtractFrameApp.com/\nExtra angle from user: video frame grabber",
+  "slideCount": 5,
+  "slides": [
+    {
+      "title": "The <b>perfect shot</b> is hiding in your videos",
+      "description": "Stop settling for <i>blurry screenshots</i>.",
+      "unsplashQuery": "frustrated person phone",
+      "role": "hook",
+      "visualDirection": "Close up of a person looking frustrated at a blurry phone screen",
+      "animation": "Fast zoom into the blurry screen",
+      "emotionalTrigger": "curiosity"
+    },
+    {
+      "title": "Screenshots <s>suck</s> for quality",
+      "description": "Standard screenshots <b>lose detail</b> and resolution.",
+      "unsplashQuery": "pixelated digital noise",
+      "role": "problem",
+      "visualDirection": "Split screen showing a pixelated screenshot vs a sharp photo",
+      "animation": "Side-by-side comparison slide",
+      "emotionalTrigger": "transformation"
+    },
+    {
+      "title": "Meet <span style=\"background-color:#ffe203;color:#ff0050\">Video To Photo</span>",
+      "description": "Extract <strong>exact frames</strong> with frame-by-frame precision.",
+      "unsplashQuery": "video editing interface",
+      "role": "intro",
+      "visualDirection": "Clean UI mockup showing a video scrubbing timeline",
+      "animation": "Smooth sliding movement of the timeline",
+      "emotionalTrigger": "convenience"
+    },
+    {
+      "title": "Scrub, Select, <b>Export</b>",
+      "description": "Save as <mark>JPG, PNG, or HEIC</mark> instantly.",
+      "unsplashQuery": "hand using smartphone",
+      "role": "experience",
+      "visualDirection": "Finger tapping a precise frame on an iPhone screen",
+      "animation": "Tap effect with haptic visual cue",
+      "emotionalTrigger": "convenience"
+    },
+    {
+      "title": "Grab your <b>perfect frame</b> now",
+      "description": "Available on <span style=\"background-color:#ffffff;color:#ff0050\">iOS</span>. Get it today!",
+      "unsplashQuery": "app store download",
+      "role": "cta",
+      "visualDirection": "App Store download button on a bright aesthetic background",
+      "animation": "Pulse effect on the CTA button",
+      "emotionalTrigger": "social proof"
+    }
+  ],
+  "files": [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg"
+  ],
+  "unsplash": {
+    "query": "iphone user photography",
+    "photoId": "Ili1gmB9Jes",
+    "author": "Sebastian Herrmann",
+    "slides": [
+      {
+        "file": "01.jpg",
+        "photoId": "Ili1gmB9Jes",
+        "author": "Sebastian Herrmann"
+      },
+      {
+        "file": "02.jpg",
+        "photoId": "0W4XLGITrHg",
+        "author": "Michael Dziedzic"
+      },
+      {
+        "file": "03.jpg",
+        "photoId": "yk9VXp4W5-Q",
+        "author": "Peter Stumpf"
+      },
+      {
+        "file": "04.jpg",
+        "photoId": "app-screenshot"
+      },
+      {
+        "file": "05.jpg",
+        "photoId": "ZVhbwDfLtYU",
+        "author": "Brett Jordan"
+      }
+    ]
+  },
+  "createdAt": "2026-05-28T13:51:48.265Z",
+  "appName": "Video To Photo - Grab Frame",
+  "appId": "extract-frame",
+  "app": {
+    "id": "extract-frame",
+    "name": "Video To Photo - Grab Frame",
+    "website": "https://ExtractFrameApp.com/"
+  },
+  "appAssets": {
+    "logo": "assets/extract-frame/logo.webp",
+    "screenshots": [
+      "assets/extract-frame/screenshots/1.webp",
+      "assets/extract-frame/screenshots/2.webp",
+      "assets/extract-frame/screenshots/3.webp",
+      "assets/extract-frame/screenshots/4.webp",
+      "assets/extract-frame/screenshots/5.webp"
+    ],
+    "website": "https://ExtractFrameApp.com/"
+  }
+}

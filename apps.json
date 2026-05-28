@@ -75,6 +75,33 @@
         "assets/make-blur/screenshots/5_ghost_alt_12_framed.webp"
       ],
       "website": "https://MakeBlur.com/"
+    },
+    {
+      "id": "extract-frame",
+      "name": "Video To Photo - Grab Frame",
+      "tagline": "Extract exact photo frames from video on iPhone",
+      "audience": "iPhone users, creators, and educators who need precise still images from video without desktop tools",
+      "problem": "You need the exact frame from a clip, but browser tools require uploads and usually lack precise frame-level control",
+      "features": [
+        "Exact frame selection with video scrubbing",
+        "Single or batch frame extraction",
+        "Export as JPG, PNG, or HEIC",
+        "Share Sheet workflow from Photos",
+        "On-device processing without video upload",
+        "ZIP/PDF export and saved projects"
+      ],
+      "platforms": ["iOS"],
+      "defaultPostType": "app-ad",
+      "hashtags": ["#ExtractFrame", "#VideoToPhoto", "#iPhoneTips", "#ContentCreator", "#FrameGrabber"],
+      "logo": "assets/extract-frame/logo.webp",
+      "screenshots": [
+        "assets/extract-frame/screenshots/1.webp",
+        "assets/extract-frame/screenshots/2.webp",
+        "assets/extract-frame/screenshots/3.webp",
+        "assets/extract-frame/screenshots/4.webp",
+        "assets/extract-frame/screenshots/5.webp"
+      ],
+      "website": "https://ExtractFrameApp.com/"
     }
   ]
 }
