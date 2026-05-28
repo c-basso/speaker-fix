@@ -1,0 +1,110 @@
+{
+  "postType": "infographic",
+  "title": "Women's Motivation: Unlock Your Potential",
+  "description": "Empowering women to overcome self-doubt, set boundaries, and achieve their goals 💪 #womensmotivation #selfempowerment #inspiration",
+  "topic": "life motivation for women",
+  "slideCount": 6,
+  "slides": [
+    {
+      "file": "01.jpg",
+      "imageTitle": "WOMEN'S MOTIVATION",
+      "topic": "overcoming self-doubt",
+      "topSection": "2-4 icons of negative self-talk, red X center, caption 'self-doubt holds you back'",
+      "bottomSection": "2-4 icons of positive affirmation, green check center, caption 'believe in yourself'",
+      "index": 1
+    },
+    {
+      "file": "02.jpg",
+      "imageTitle": "BALANCE YOUR LIFE",
+      "topic": "work-life balance",
+      "topSection": "2-4 icons representing burnout, red X center, caption 'exhausted from juggling'",
+      "bottomSection": "2-4 icons representing balance, green check center, caption 'prioritize what matters'",
+      "index": 2
+    },
+    {
+      "file": "03.jpg",
+      "imageTitle": "SET HEALTHY BOUNDARIES",
+      "topic": "personal boundaries",
+      "topSection": "2-4 icons of people overstepping, red X center, caption 'people pleasing harms you'",
+      "bottomSection": "2-4 icons of personal space, green check center, caption 'say no to protect yourself'",
+      "index": 3
+    },
+    {
+      "file": "04.jpg",
+      "imageTitle": "FINANCIAL FREEDOM",
+      "topic": "women's financial independence",
+      "topSection": "2-4 icons of financial stress, red X center, caption 'money worries limit you'",
+      "bottomSection": "2-4 icons of financial planning, green check center, caption 'build your wealth'",
+      "index": 4
+    },
+    {
+      "file": "05.jpg",
+      "imageTitle": "SELF-CARE IS ESSENTIAL",
+      "topic": "women's self-care",
+      "topSection": "2-4 icons of neglect, red X center, caption 'neglecting yourself backfires'",
+      "bottomSection": "2-4 icons of self-care, green check center, caption 'nurture yourself daily'",
+      "index": 5
+    },
+    {
+      "file": "06.jpg",
+      "imageTitle": "EMPOWER YOURSELF",
+      "topic": "women's empowerment",
+      "topSection": "2-4 icons of limiting beliefs, red X center, caption 'don't settle for less'",
+      "bottomSection": "2-4 icons of growth, green check center, caption 'you are limitless'",
+      "index": 6
+    }
+  ],
+  "files": [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg"
+  ],
+  "imageGen": {
+    "model": "x-ai/grok-imagine-image-quality",
+    "aspectRatio": "1:1",
+    "width": 1080,
+    "height": 1080,
+    "slides": [
+      {
+        "file": "01.jpg",
+        "imageTitle": "WOMEN'S MOTIVATION",
+        "topic": "overcoming self-doubt",
+        "promptFile": "_prompts/01.txt"
+      },
+      {
+        "file": "02.jpg",
+        "imageTitle": "BALANCE YOUR LIFE",
+        "topic": "work-life balance",
+        "promptFile": "_prompts/02.txt"
+      },
+      {
+        "file": "03.jpg",
+        "imageTitle": "SET HEALTHY BOUNDARIES",
+        "topic": "personal boundaries",
+        "promptFile": "_prompts/03.txt"
+      },
+      {
+        "file": "04.jpg",
+        "imageTitle": "FINANCIAL FREEDOM",
+        "topic": "women's financial independence",
+        "promptFile": "_prompts/04.txt"
+      },
+      {
+        "file": "05.jpg",
+        "imageTitle": "SELF-CARE IS ESSENTIAL",
+        "topic": "women's self-care",
+        "promptFile": "_prompts/05.txt"
+      },
+      {
+        "file": "06.jpg",
+        "imageTitle": "EMPOWER YOURSELF",
+        "topic": "women's empowerment",
+        "promptFile": "_prompts/06.txt"
+      }
+    ]
+  },
+  "createdAt": "2026-05-28T07:29:00.943Z"
+}
