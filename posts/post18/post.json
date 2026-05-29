@@ -1,0 +1,116 @@
+{
+  "postType": "infographic",
+  "title": "SIDE-HUSTLE HACKS: EARN ON THE SIDE",
+  "description": "Discover 6 simple side-hustle ideas and passive-income hacks to boost your income. No complex setups, just actionable tips. #SideHustle #PassiveIncome #EarnExtra #FinancialFreedom",
+  "topic": "simple side‑hustle ideas and passive‑income hacks",
+  "slideCount": 6,
+  "slides": [
+    {
+      "file": "01.jpg",
+      "slideRole": "hook",
+      "imageTitle": "EARN WITHOUT A JOB",
+      "topic": "side-hustle ideas",
+      "topSection": "Red X center: 'NO JOB? NO PROBLEM.' 3 icons: phone, laptop, dollar sign. Caption: 'Make $100/mo from home.'",
+      "bottomSection": "Green check center: 3 icons: apps, passive income, money. Caption: 'HERE'S HOW TO START.'",
+      "index": 1
+    },
+    {
+      "file": "02.jpg",
+      "slideRole": "build",
+      "imageTitle": "TIME IS MONEY",
+      "topic": "time constraints",
+      "topSection": "Red X center: 'NO TIME TO WORK?' 2 icons: clock, stress. Caption: 'Traditional jobs drain your hours.'",
+      "bottomSection": "Green check center: 2 icons: savings, goals. Caption: 'Passive income works 24/7.'",
+      "index": 2
+    },
+    {
+      "file": "03.jpg",
+      "slideRole": "build",
+      "imageTitle": "FREEDOM FROM 9-5",
+      "topic": "side-hustle benefits",
+      "topSection": "Red X center: 'FULL-TIME JOBS LIMIT YOU.' 2 icons: 9-5, bills. Caption: 'Side-hustles give you control.'",
+      "bottomSection": "Green check center: 2 icons: freelance, side gigs. Caption: 'Earn while you sleep.'",
+      "index": 3
+    },
+    {
+      "file": "04.jpg",
+      "slideRole": "build",
+      "imageTitle": "SELL WHAT YOU CREATE",
+      "topic": "digital products",
+      "topSection": "Red X center: 'SELL WHAT YOU CREATE.' 2 icons: ebook, app. Caption: 'No inventory needed.'",
+      "bottomSection": "Green check center: 2 icons: affiliate links, ads. Caption: 'Passive income streams.'",
+      "index": 4
+    },
+    {
+      "file": "05.jpg",
+      "slideRole": "build",
+      "imageTitle": "AUTOMATE WITH TOOLS",
+      "topic": "tech tools",
+      "topSection": "Red X center: 'AUTOMATE WITH TOOLS.' 2 icons: apps, social media. Caption: 'Apps handle the work.'",
+      "bottomSection": "Green check center: 2 icons: AI, scheduling. Caption: 'Set it and forget it.'",
+      "index": 5
+    },
+    {
+      "file": "06.jpg",
+      "slideRole": "cta",
+      "imageTitle": "START TODAY",
+      "topic": "actionable steps",
+      "topSection": "Red X center: 'TAKE THE FIRST STEP.' 2 icons: phone, money. Caption: 'Pick 1 hack and try.'",
+      "bottomSection": "Green check center: 2 icons: checklist, success. Caption: 'Your side-hustle starts now.'",
+      "index": 6
+    }
+  ],
+  "files": [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg"
+  ],
+  "imageGen": {
+    "model": "x-ai/grok-imagine-image-quality",
+    "aspectRatio": "1:1",
+    "width": 1080,
+    "height": 1080,
+    "slides": [
+      {
+        "file": "01.jpg",
+        "imageTitle": "EARN WITHOUT A JOB",
+        "topic": "side-hustle ideas",
+        "promptFile": "_prompts/01.txt"
+      },
+      {
+        "file": "02.jpg",
+        "imageTitle": "TIME IS MONEY",
+        "topic": "time constraints",
+        "promptFile": "_prompts/02.txt"
+      },
+      {
+        "file": "03.jpg",
+        "imageTitle": "FREEDOM FROM 9-5",
+        "topic": "side-hustle benefits",
+        "promptFile": "_prompts/03.txt"
+      },
+      {
+        "file": "04.jpg",
+        "imageTitle": "SELL WHAT YOU CREATE",
+        "topic": "digital products",
+        "promptFile": "_prompts/04.txt"
+      },
+      {
+        "file": "05.jpg",
+        "imageTitle": "AUTOMATE WITH TOOLS",
+        "topic": "tech tools",
+        "promptFile": "_prompts/05.txt"
+      },
+      {
+        "file": "06.jpg",
+        "imageTitle": "START TODAY",
+        "topic": "actionable steps",
+        "promptFile": "_prompts/06.txt"
+      }
+    ]
+  },
+  "createdAt": "2026-05-29T06:05:59.567Z"
+}

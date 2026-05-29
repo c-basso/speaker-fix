@@ -86,6 +86,7 @@ async function createInfographicPost(ctx) {
 
   const slidesMeta = content.slides.map((slide, i) => ({
     file: slideFiles[i],
+    slideRole: slide.slideRole,
     imageTitle: slide.imageTitle,
     topic: slide.topic,
     topSection: slide.topSection,

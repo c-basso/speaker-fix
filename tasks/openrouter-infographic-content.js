@@ -51,13 +51,25 @@ function normalizeInfographicSlides(data, targetCount) {
     slides.push({ ...lastWithContent() });
   }
 
-  return slides.map((s, index) => ({
-    index: index + 1,
-    imageTitle: sanitizeField(s.imageTitle, `slides[${index}].imageTitle`),
-    topic: sanitizeField(s.topic || s.imageTitle, `slides[${index}].topic`),
-    topSection: sanitizeField(s.topSection, `slides[${index}].topSection`),
-    bottomSection: sanitizeField(s.bottomSection, `slides[${index}].bottomSection`),
-  }));
+  return slides.map((s, index) => {
+    const isFirst = index === 0;
+    const isLast = index === targetCount - 1;
+    let slideRole = String(s.slideRole || '').trim().toLowerCase();
+    if (!['hook', 'build', 'cta'].includes(slideRole)) {
+      if (isFirst) slideRole = 'hook';
+      else if (isLast) slideRole = 'cta';
+      else slideRole = 'build';
+    }
+
+    return {
+      index: index + 1,
+      slideRole,
+      imageTitle: sanitizeField(s.imageTitle, `slides[${index}].imageTitle`),
+      topic: sanitizeField(s.topic || s.imageTitle, `slides[${index}].topic`),
+      topSection: sanitizeField(s.topSection, `slides[${index}].topSection`),
+      bottomSection: sanitizeField(s.bottomSection, `slides[${index}].bottomSection`),
+    };
+  });
 }
 
 function countInvalidInfographicSlides(slides) {

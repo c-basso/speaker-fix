@@ -4,6 +4,27 @@ const { MIN_SLIDES, MAX_SLIDES } = require('./post-slides.js');
 const { INFOGRAPHIC_SLIDE_COUNT } = require('./post-types.js');
 const { getInfographicAspect } = require('./infographic-aspect.js');
 
+const CAROUSEL_CONTENT_RULES = `How to write slide CONTENT (English only):
+
+1) Strong first slide (HOOK)
+- Slide 1 must stop the scroll: bold tension, relatable problem, or surprising myth.
+- Make the viewer think "that's me" or "wait, really?" — not a generic title slide.
+
+2) Clear narrative arc (BUILD)
+- Middle slides unfold ONE logical story: problem → why it matters → specific causes/habits → better choices.
+- Each slide adds a new angle; never repeat the same point with different wording.
+- Order must feel inevitable — slide 3 should make sense only after slides 1–2.
+
+3) Good rhythm (PACING)
+- Alternate energy: shock → explain → contrast → practical tip → reinforce.
+- Vary the "bad vs good" examples slide to slide so the carousel does not feel copy-pasted.
+- Keep one clear idea per slide; do not cram two unrelated lessons into one frame.
+
+4) Strong final slide (CTA)
+- Last slide = clear Call to Action: what to do next (save, try, share, start today).
+- Bottom half should feel empowering and specific — not vague "be healthy".
+- imageTitle on the last slide can sound like a command or takeaway (e.g. START TODAY, SAVE THIS).`;
+
 function buildInfographicJsonSchema(forcedSlideCount) {
   const countField = forcedSlideCount ?? 'integer';
   return `Output ONE valid JSON object only. No markdown.
@@ -13,6 +34,7 @@ function buildInfographicJsonSchema(forcedSlideCount) {
   "description": "plain text caption with hashtags, max 400 chars",
   "slides": [
     {
+      "slideRole": "hook|build|cta",
       "imageTitle": "SHORT BOLD HEADLINE for top of infographic (e.g. SPERM HEALTH)",
       "topic": "2-6 words — subject of this slide for prompt (e.g. sperm health)",
       "topSection": "Top half: 2-4 clear icons, red X in center, one short caption (4-8 words). No duplicate text.",
@@ -43,9 +65,12 @@ Layout per slide:
 
 ${countRule}
 
-Carousel narrative:
-- One main theme; each slide = different sub-angle.
-- Slide 1 = hook; last slide = takeaway.
+${CAROUSEL_CONTENT_RULES}
+
+Carousel roles (assign slideRole on every slide):
+- Slide 1: slideRole = "hook" — strongest attention grab in the whole carousel.
+- Slides 2 … (slideCount - 1): slideRole = "build" — logical progression, one sub-topic each.
+- Last slide: slideRole = "cta" — actionable Call to Action, motivating close.
 
 Rules:
 - imageTitle = ALL CAPS, 2–5 words
@@ -62,7 +87,8 @@ function buildInfographicUserMessage(topic, extraContext = '') {
   return [
     `Main carousel theme: ${t}`,
     ctx ? `Extra context from author:\n${ctx}` : '',
-    `Plan ${INFOGRAPHIC_SLIDE_COUNT} distinct infographic slides — clean layout, limited text noise per slide.`,
+    `Plan ${INFOGRAPHIC_SLIDE_COUNT} distinct infographic slides.`,
+    'Strong hook on slide 1, clear story arc in the middle, solid CTA on the last slide. English only.',
     'Valid JSON only.',
   ]
     .filter(Boolean)
@@ -70,6 +96,7 @@ function buildInfographicUserMessage(topic, extraContext = '') {
 }
 
 module.exports = {
+  CAROUSEL_CONTENT_RULES,
   buildInfographicSystemPrompt,
   buildInfographicUserMessage,
 };
