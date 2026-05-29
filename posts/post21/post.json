@@ -1,0 +1,120 @@
+{
+  "postType": "app-ad",
+  "title": "Extract Audio from Video: No Uploads, Just MP3",
+  "description": "Convert video to MP3 on your iPhone in seconds. No online uploads, no sketchy sites. Get your audio privately. #ExtractAudioApp #iOS #AudioExtraction\nhttps://ExtractAudioApp.com/",
+  "topic": "App: Extract Audio from Video\nTagline: Convert video to MP3 on iPhone in seconds\nAudience: iPhone users who want music, voice, or lecture audio from videos without uploading files to the web\nProblem: Online converters are slow, sketchy, and upload your private videos — you just need an MP3 from a clip on your phone\nFeatures: Video to MP3 on device (MP4, MOV); Share Sheet from Photos or Files; Trim before export; Private on-device processing; Free core extraction, optional in-app purchases\nPlatforms: iOS\nWebsite (optional in CTA/caption): https://ExtractAudioApp.com/\nExtra angle from user: extract audio from video",
+  "slideCount": 6,
+  "slides": [
+    {
+      "title": "<b>No Uploads. No Risk.</b>",
+      "description": "<strong>Extract audio</strong> from videos on your iPhone. No files sent online. Just tap and get MP3.",
+      "role": "hook",
+      "visualDirection": "A frustrated person holding a phone with a video playing",
+      "animation": "Zoom in on the phone screen showing a video",
+      "emotionalTrigger": "FOMO"
+    },
+    {
+      "title": "<i>Online converters are sketchy.</i>",
+      "description": "<mark>Uploading videos</mark> risks privacy. Slow, unreliable, and data theft.",
+      "role": "problem",
+      "visualDirection": "Screen showing a slow-loading online converter",
+      "animation": "Glitch effects on the converter screen",
+      "emotionalTrigger": "exclusivity"
+    },
+    {
+      "title": "<u>Your privacy is compromised.</u>",
+      "description": "<em>Your videos</em> could be stolen or sold. No one wants that.",
+      "role": "agitate",
+      "visualDirection": "A video file being uploaded with a warning icon",
+      "animation": "Data packets flowing out of the phone",
+      "emotionalTrigger": "transformation"
+    },
+    {
+      "title": "<b>Extract Audio On Device.</b>",
+      "description": "<strong>No uploads.</strong> Process videos directly on your iPhone. Fast, private, and easy.",
+      "role": "intro",
+      "visualDirection": "iPhone screen with app icon glowing",
+      "animation": "Smooth slide transition to app interface",
+      "emotionalTrigger": "convenience"
+    },
+    {
+      "title": "<i>Trim & Share Instantly.</i>",
+      "description": "<em>Cut clips</em> before exporting. Share directly to music apps or messages.",
+      "role": "experience",
+      "visualDirection": "Hand swiping to trim a video clip on iPhone",
+      "animation": "Swipe animation revealing trimmed audio",
+      "emotionalTrigger": "transformation"
+    },
+    {
+      "title": "<strong>Get It Now.</strong>",
+      "description": "<strong>Download Extract Audio from Video. Free core features. #iOSApp #AudioExtraction</strong>",
+      "role": "cta",
+      "visualDirection": "App store button with glowing text",
+      "animation": "Button pulse effect",
+      "emotionalTrigger": "exclusivity"
+    }
+  ],
+  "files": [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg"
+  ],
+  "unsplash": {
+    "query": "iPhone audio extraction",
+    "photoId": "IHecRXio89c",
+    "author": "Brett Jordan",
+    "slides": [
+      {
+        "file": "01.jpg",
+        "photoId": "IHecRXio89c",
+        "author": "Brett Jordan"
+      },
+      {
+        "file": "02.jpg",
+        "photoId": "tsFN5tmgJPw",
+        "author": "Abdul Artega"
+      },
+      {
+        "file": "03.jpg",
+        "photoId": "AGRtDoZlpYw",
+        "author": "omid armin"
+      },
+      {
+        "file": "04.jpg",
+        "photoId": "fPZyN5Eih5E",
+        "author": "Miguel Tomás"
+      },
+      {
+        "file": "05.jpg",
+        "photoId": "app-screenshot"
+      },
+      {
+        "file": "06.jpg",
+        "photoId": "OOVomt_6wEY",
+        "author": "simerpreet singh"
+      }
+    ]
+  },
+  "createdAt": "2026-05-29T16:25:28.999Z",
+  "appName": "Extract Audio from Video",
+  "appId": "extract-audio",
+  "app": {
+    "id": "extract-audio",
+    "name": "Extract Audio from Video",
+    "website": "https://ExtractAudioApp.com/"
+  },
+  "appAssets": {
+    "logo": "assets/extract-audio/logo.png",
+    "screenshots": [
+      "assets/extract-audio/screenshots/1_cover_12_framed.png",
+      "assets/extract-audio/screenshots/2_extract_12_framed.png",
+      "assets/extract-audio/screenshots/3_trim_12_framed.png",
+      "assets/extract-audio/screenshots/4_share_12_framed.png",
+      "assets/extract-audio/screenshots/5_store_12_framed.png"
+    ],
+    "website": "https://ExtractAudioApp.com/"
+  }
+}
