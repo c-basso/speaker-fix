@@ -1,0 +1,12 @@
+Educational infographic about common money mistakes, white background, bold black title "MONEY MISTAKES" at the top.
+
+Top section:
+Show 3 wasteful spending icons (coffee shop, luxury clothes, takeout) with red X center, caption: 'Throwing cash away daily'
+
+Bottom section:
+Show 3 growing investment icons (stock graph, real estate, gold bars) with green check center, caption: 'Wealth compounding over time'
+
+Clean balanced infographic, TikTok photo carousel, square 1:1 aspect ratio, 1080×1080px canvas.
+Keep the full top and bottom sections visible inside the frame (compact layout, safe margins — nothing cut off at edges).
+Flat vector illustration, white background, high contrast. A few large icons per half.
+Readable short captions only (one line per half). No paragraph text, no duplicate labels.
