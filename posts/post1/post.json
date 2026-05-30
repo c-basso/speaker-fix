@@ -1,0 +1,126 @@
+{
+  "postType": "app-ad",
+  "title": "Make Blur - Perfect Background Blur for iPhone",
+  "description": "📸 Fix portrait mode, blur faces for privacy, or get creative with 7 blur styles - all in seconds! #iPhone #PhotoEditing #Privacy #MakeBlur\nhttps://MakeBlur.com/",
+  "topic": "App: Make Blur\nTagline: Blur background and faces on iPhone in seconds\nAudience: iPhone users who want portrait-style background blur, creative photo effects, or privacy-safe sharing without complicated editors\nProblem: Portrait mode only works on some shots, other blur apps are paywalled or confusing, and you need to blur backgrounds or faces before posting group photos\nFeatures: Auto-detect background blur in seconds; Face blur for privacy on group shots; Seven blur styles: Bokeh, motion, Gaussian, ghosting, pixelate, hexagonal, crystalize; Custom brush to blur exactly where you want; Freemium — core tools free, optional in-app purchases\nPlatforms: iOS\nWebsite (optional in CTA/caption): https://MakeBlur.com/\nExtra angle from user: background blur app",
+  "slideCount": 6,
+  "slides": [
+    {
+      "title": "<strong>Blur problems?</strong>",
+      "description": "<mark>Portrait mode fails</mark> on your iPhone photos",
+      "unsplashQuery": "iPhone portrait mode fail",
+      "role": "hook",
+      "visualDirection": "Split screen showing good vs bad portrait mode",
+      "animation": "Quick zoom on failed portrait shots",
+      "emotionalTrigger": "frustration"
+    },
+    {
+      "title": "<strong>Blur apps</strong> <mark>too complicated</mark>",
+      "description": "<strong>Other apps make you pay or have confusing interfaces</strong>",
+      "unsplashQuery": "frustrated phone user",
+      "role": "problem",
+      "visualDirection": "Person looking frustrated at phone screen",
+      "animation": "Shake head in disappointment",
+      "emotionalTrigger": "annoyance"
+    },
+    {
+      "title": "<strong>Group photos</strong> <mark>blur faces</mark>",
+      "description": "<strong>Need privacy but don't want to edit for hours</strong>",
+      "unsplashQuery": "group photo privacy concern",
+      "role": "agitate",
+      "visualDirection": "Close up of worried face in group photo",
+      "animation": "Zoom on faces that need blurring",
+      "emotionalTrigger": "anxiety"
+    },
+    {
+      "title": "<strong>Make Blur</strong> <mark>fixes everything</mark>",
+      "description": "<strong>Auto-detect backgrounds and faces in seconds</strong>",
+      "unsplashQuery": "app interface design",
+      "role": "intro",
+      "visualDirection": "App interface showing blur options",
+      "animation": "Smooth reveal of app features",
+      "emotionalTrigger": "relief"
+    },
+    {
+      "title": "<strong>7 blur styles</strong> <mark>in one tap</mark>",
+      "description": "<strong>From bokeh to crystalize - perfect for any photo</strong>",
+      "unsplashQuery": "photo blur effects",
+      "role": "experience",
+      "visualDirection": "Quick transitions between different blur effects",
+      "animation": "Swiping through blur styles",
+      "emotionalTrigger": "excitement"
+    },
+    {
+      "title": "<strong>Download now</strong> <mark>blur like a pro</mark>",
+      "description": "<strong>Try free - premium effects available</strong>",
+      "unsplashQuery": "app store download",
+      "role": "cta",
+      "visualDirection": "App store button with \"Get\" animation",
+      "animation": "Bounce on download button",
+      "emotionalTrigger": "urgency"
+    }
+  ],
+  "files": [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg"
+  ],
+  "unsplash": {
+    "query": "iPhone photo blur",
+    "photoId": "bhcwkkM03rg",
+    "author": "Javier Esteban",
+    "slides": [
+      {
+        "file": "01.jpg",
+        "photoId": "bhcwkkM03rg",
+        "author": "Javier Esteban"
+      },
+      {
+        "file": "02.jpg",
+        "photoId": "Ili1gmB9Jes",
+        "author": "Sebastian Herrmann"
+      },
+      {
+        "file": "03.jpg",
+        "photoId": "mMnU-UMmXok",
+        "author": "Clayton Cardinalli"
+      },
+      {
+        "file": "04.jpg",
+        "photoId": "sv8oOQaUb-o",
+        "author": "Amélie Mourichon"
+      },
+      {
+        "file": "05.jpg",
+        "photoId": "app-screenshot"
+      },
+      {
+        "file": "06.jpg",
+        "photoId": "ZVhbwDfLtYU",
+        "author": "Brett Jordan"
+      }
+    ]
+  },
+  "createdAt": "2026-05-30T07:57:30.225Z",
+  "appName": "Make Blur",
+  "appId": "make-blur",
+  "app": {
+    "id": "make-blur",
+    "name": "Make Blur",
+    "website": "https://MakeBlur.com/"
+  },
+  "appAssets": {
+    "logo": "assets/make-blur/logo.webp",
+    "screenshots": [
+      "assets/make-blur/screenshots/1_box_12_framed.webp",
+      "assets/make-blur/screenshots/2_motion_12_framed.webp",
+      "assets/make-blur/screenshots/3_ghost_12_framed.webp",
+      "assets/make-blur/screenshots/4_crystal_12_framed.webp",
+      "assets/make-blur/screenshots/5_ghost_alt_12_framed.webp"
+    ],
+    "website": "https://MakeBlur.com/"
+  }
+}
