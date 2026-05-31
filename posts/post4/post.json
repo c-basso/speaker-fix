@@ -1,0 +1,116 @@
+{
+  "postType": "infographic",
+  "title": "Stop losing money to inflation 📉",
+  "description": "Stop keeping all your cash in a savings account. Here is the roadmap to building real wealth through smart diversification and strategy. 🚀 #investing #wealthbuilding #financialfreedom #stocks #moneytips",
+  "topic": "smart investment strategies",
+  "slideCount": 6,
+  "slides": [
+    {
+      "file": "01.jpg",
+      "slideRole": "hook",
+      "imageTitle": "THE CASH TRAP",
+      "topic": "inflation vs investing",
+      "topSection": "Left: Pile of cash, Right: Shrinking piggy bank, Center: Red X. Caption: Holding only cash loses purchasing power.",
+      "bottomSection": "Left: Stock chart, Right: Gold bar, Center: Green check. Caption: Assets grow faster than inflation.",
+      "index": 1
+    },
+    {
+      "file": "02.jpg",
+      "slideRole": "build",
+      "imageTitle": "RISK MANAGEMENT",
+      "topic": "concentration vs diversification",
+      "topSection": "Left: One giant egg, Right: Single stock logo, Center: Red X. Caption: Putting all eggs in one basket.",
+      "bottomSection": "Left: Index fund icon, Right: Real estate icon, Center: Green check. Caption: Spreading risk across different assets.",
+      "index": 2
+    },
+    {
+      "file": "03.jpg",
+      "slideRole": "build",
+      "imageTitle": "TIMING THE MARKET",
+      "topic": "market timing vs time in market",
+      "topSection": "Left: Panic sell button, Right: Stressful news feed, Center: Red X. Caption: Trying to predict the bottom.",
+      "bottomSection": "Left: Calendar icon, Right: Upward arrow, Center: Green check. Caption: Consistent growth over long periods.",
+      "index": 3
+    },
+    {
+      "file": "04.jpg",
+      "slideRole": "build",
+      "imageTitle": "INVESTING STYLE",
+      "topic": "speculation vs investing",
+      "topSection": "Left: Casino chips, Right: Hype-train meme coin, Center: Red X. Caption: Gambling on overnight moonshots.",
+      "bottomSection": "Left: Company balance sheet, Right: Dividend check, Center: Green check. Caption: Investing in proven value.",
+      "index": 4
+    },
+    {
+      "file": "05.jpg",
+      "slideRole": "build",
+      "imageTitle": "THE COST OF WAITING",
+      "topic": "compound interest",
+      "topSection": "Left: Person sleeping, Right: Empty wallet, Center: Red X. Caption: Starting too late kills growth.",
+      "bottomSection": "Left: Small seed, Right: Giant money tree, Center: Green check. Caption: Start early to compound wealth.",
+      "index": 5
+    },
+    {
+      "file": "06.jpg",
+      "slideRole": "build",
+      "imageTitle": "SMART CONTRIBUTION",
+      "topic": "dollar cost averaging",
+      "topSection": "Left: Huge single payment, Right: Market crash chart, Center: Red X. Caption: Investing everything at one peak.",
+      "bottomSection": "Left: Small monthly coins, Right: Steady line graph, Center: Green check. Caption: Fixed amounts every single month.",
+      "index": 6
+    }
+  ],
+  "files": [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg"
+  ],
+  "imageGen": {
+    "model": "x-ai/grok-imagine-image-quality",
+    "aspectRatio": "1:1",
+    "width": 1080,
+    "height": 1080,
+    "slides": [
+      {
+        "file": "01.jpg",
+        "imageTitle": "THE CASH TRAP",
+        "topic": "inflation vs investing",
+        "promptFile": "_prompts/01.txt"
+      },
+      {
+        "file": "02.jpg",
+        "imageTitle": "RISK MANAGEMENT",
+        "topic": "concentration vs diversification",
+        "promptFile": "_prompts/02.txt"
+      },
+      {
+        "file": "03.jpg",
+        "imageTitle": "TIMING THE MARKET",
+        "topic": "market timing vs time in market",
+        "promptFile": "_prompts/03.txt"
+      },
+      {
+        "file": "04.jpg",
+        "imageTitle": "INVESTING STYLE",
+        "topic": "speculation vs investing",
+        "promptFile": "_prompts/04.txt"
+      },
+      {
+        "file": "05.jpg",
+        "imageTitle": "THE COST OF WAITING",
+        "topic": "compound interest",
+        "promptFile": "_prompts/05.txt"
+      },
+      {
+        "file": "06.jpg",
+        "imageTitle": "SMART CONTRIBUTION",
+        "topic": "dollar cost averaging",
+        "promptFile": "_prompts/06.txt"
+      }
+    ]
+  },
+  "createdAt": "2026-05-31T11:25:13.401Z"
+}
